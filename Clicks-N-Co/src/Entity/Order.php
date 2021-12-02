@@ -24,12 +24,12 @@ class Order
     private $total_price;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", options={"default":0})
      */
     private $status;
 
     /**
-     * @ORM\Column(type="datetime_immutable", options={"default":0})
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
