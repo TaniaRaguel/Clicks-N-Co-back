@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,28 @@ class Order
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Shop::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $shop;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Orderline::class, mappedBy="orderRef")
+     */
+    private $orderlines;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->orderlines = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +111,60 @@ class Order
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getShop(): ?Shop
+    {
+        return $this->shop;
+    }
+
+    public function setShop(?Shop $shop): self
+    {
+        $this->shop = $shop;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Orderline[]
+     */
+    public function getOrderlines(): Collection
+    {
+        return $this->orderlines;
+    }
+
+    public function addOrderline(Orderline $orderline): self
+    {
+        if (!$this->orderlines->contains($orderline)) {
+            $this->orderlines[] = $orderline;
+            $orderline->setOrderRef($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderline(Orderline $orderline): self
+    {
+        if ($this->orderlines->removeElement($orderline)) {
+            // set the owning side to null (unless already changed)
+            if ($orderline->getOrderRef() === $this) {
+                $orderline->setOrderRef(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

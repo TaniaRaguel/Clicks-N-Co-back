@@ -27,6 +27,18 @@ class Orderline
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orderlines")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="orderlines")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $orderRef;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +64,30 @@ class Orderline
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    public function getOrderRef(): ?Order
+    {
+        return $this->orderRef;
+    }
+
+    public function setOrderRef(?Order $orderRef): self
+    {
+        $this->orderRef = $orderRef;
 
         return $this;
     }

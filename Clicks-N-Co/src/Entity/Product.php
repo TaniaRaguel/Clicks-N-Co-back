@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +58,28 @@ class Product
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")
+     */
+    private $tags;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Orderline::class, mappedBy="product")
+     */
+    private $orderlines;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Shop::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $shop;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+        $this->orderlines = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +178,72 @@ class Product
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Orderline[]
+     */
+    public function getOrderlines(): Collection
+    {
+        return $this->orderlines;
+    }
+
+    public function addOrderline(Orderline $orderline): self
+    {
+        if (!$this->orderlines->contains($orderline)) {
+            $this->orderlines[] = $orderline;
+            $orderline->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderline(Orderline $orderline): self
+    {
+        if ($this->orderlines->removeElement($orderline)) {
+            // set the owning side to null (unless already changed)
+            if ($orderline->getProduct() === $this) {
+                $orderline->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getShop(): ?Shop
+    {
+        return $this->shop;
+    }
+
+    public function setShop(?Shop $shop): self
+    {
+        $this->shop = $shop;
 
         return $this;
     }
