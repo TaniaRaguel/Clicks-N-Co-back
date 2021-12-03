@@ -72,7 +72,7 @@ class Shop
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $slug_shop;
+    private $name_slug;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -237,14 +237,22 @@ class Shop
         return $this;
     }
 
-    public function getSlugShop(): ?string
+    /**
+     * Get the value of name_slug
+     */ 
+    public function getName_slug()
     {
-        return $this->slug_shop;
+        return $this->name_slug;
     }
 
-    public function setSlugShop(string $slug_shop): self
+    /**
+     * Set the value of name_slug
+     *
+     * @return  self
+     */ 
+    public function setName_slug($name_slug)
     {
-        $this->slug_shop = $slug_shop;
+        $this->name_slug = $name_slug;
 
         return $this;
     }
@@ -368,4 +376,6 @@ class Shop
 
         return $this;
     }
+
+    
 }
