@@ -19,6 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
+     *  @Groups({ "shop_add"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -42,11 +43,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @Groups({ "shop_add"})
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
     /**
+     * @Groups({ "shop_add"})
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
@@ -97,7 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $orders;
 
     /**
-     * @Groups({"shop_homeShop",})
+     * @Groups({"shop_homeShop","shop_search"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;

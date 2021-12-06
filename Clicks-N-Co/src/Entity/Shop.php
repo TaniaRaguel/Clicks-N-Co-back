@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Shop
 {
     /**
-     * @Groups({"shop_homeShop",})
+     * @Groups({"shop_homeShop","shop_read", "shop_add", "shop_search"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,59 +23,68 @@ class Shop
     private $id;
 
     /**
-     * @Groups({"shop_homeShop",})
+     * @Groups({"shop_homeShop", "shop_read", "shop_add", "shop_search"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * 
+     * @Groups({"shop_read", "shop_add","shop_search"})
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
-     * @Groups({"shop_homeShop",})
+     * @Groups({"shop_homeShop","shop_read", "shop_add","shop_search"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
     /**
-     * @Groups({"shop_homeShop",})
+     * @Groups({"shop_homeShop","shop_read", "shop_add","shop_search"})
      * @ORM\Column(type="string", length=255)
      */
     private $address;
 
     /**
+     * @Groups({"shop_read", "shop_add"})
      * @ORM\Column(type="string", length=64)
      */
     private $zip_code;
 
     /**
+     * @Groups({"shop_read", "shop_add"})
      * @ORM\Column(type="string", length=64)
      */
     private $city;
 
     /**
+     * @Groups({"shop_read" })
      * @ORM\Column(type="string", length=64)
      */
     private $city_slug;
 
     /**
+     * @Groups({"shop_read", "shop_add", "shop_add"})
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Groups({"shop_read", "shop_add"})
      * @ORM\Column(type="string", length=32)
      */
     private $phone_number;
 
     /**
+     * @Groups({"shop_read", "shop_add", "shop_search"})
      * @ORM\Column(type="string", length=128)
      */
     private $opening_hours;
 
     /**
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name_slug;
@@ -91,6 +100,7 @@ class Shop
     private $updatedAt;
 
     /**
+     * @Groups({"shop_read"})
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="shop")
      */
     private $products;
@@ -106,7 +116,7 @@ class Shop
     private $orders;
 
     /**
-     * @Groups({"shop_homeShop",})
+     * @Groups({"shop_homeShop","shop_search"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shops")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -117,6 +127,8 @@ class Shop
         $this->products = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+
     }
 
     public function getId(): ?int

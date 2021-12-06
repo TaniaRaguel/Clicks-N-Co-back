@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\Shop;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use DoctrineExtensions\Query\Mysql\Rand;
+use Doctrine\ORM\Query\SqlWalker;
+use \Doctrine\Common\ClassLoader;
 
 /**
  * @method Shop|null find($id, $lockMode = null, $lockVersion = null)
@@ -30,13 +32,8 @@ class ShopRepository extends ServiceEntityRepository
     {
                
             return
-
-
              $this->createQueryBuilder('shop')
-
-            
-             
-            ->orderBy('RAND()')
+            /* ->orderBy('RAND()') */
             ->setMaxResults(5)
 
             ->getQuery()
@@ -45,6 +42,34 @@ class ShopRepository extends ServiceEntityRepository
               
         
     }
+
+    /**
+     * DQL : Doctrine Query Language
+     * 
+     * Retourne les villes qui correspondent à un terme de recherche
+     *
+     * @return void
+     */
+    public function findAllBySearchTermDQL($searchTerm)
+    {
+        // Etape 1 : On appelle le manager
+        $manager = $this->getEntityManager();
+
+        // Etape 2 : On prépare la Requete SQL
+        $query = $manager->createQuery(
+            'SELECT shop
+             FROM App\Entity\shop shop
+             WHERE shop.city LIKE :searchTerm
+            '
+        )
+            // On prépare le paramètre (nettoyage de sécurité)
+            ->setParameter(':searchTerm', "%$searchTerm%");
+
+        // On execute, qui nous retourne un résultat
+        return $query->getResult();
+    }
+
+
 
 
     // /**
