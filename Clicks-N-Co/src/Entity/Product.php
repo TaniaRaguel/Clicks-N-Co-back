@@ -14,11 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Product
 {
   /**
-<<<<<<< HEAD
-   * @Groups({"product_browse", "product_read", "order_read"})
-=======
-   * @Groups({"product_browse", "product_read", "orderline_browse", "orderline_read"})
->>>>>>> 85ed5fbf0231d2e97010a752d58eec337a55834c
+   * @Groups({"product_browse", "product_read", "order_read", "orderline_browse", "orderline_read"})
    * @ORM\Id
    * @ORM\GeneratedValue
    * @ORM\Column(type="integer")
@@ -26,11 +22,7 @@ class Product
   private $id;
 
   /**
-<<<<<<< HEAD
-   * @Groups({"product_browse", "product_read", "order_read"})
-=======
-   * @Groups({"product_browse", "product_read", "orderline_browse", "orderline_read"})
->>>>>>> 85ed5fbf0231d2e97010a752d58eec337a55834c
+   * @Groups({"product_browse", "product_read", "order_read", "orderline_browse", "orderline_read"})
    * @ORM\Column(type="string", length=255)
    */
   private $name;
