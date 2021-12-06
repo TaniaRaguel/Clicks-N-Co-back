@@ -34,6 +34,7 @@ class AppFixtures extends Fixture
     $user1->setCity('Bayonne');
     $user1->setCitySlug('bayonne');
     $user1->setCreatedAt(new \DateTimeImmutable());
+    $user1->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
 
     $manager->persist($user1);
 
@@ -49,6 +50,7 @@ class AppFixtures extends Fixture
     $user2->setCity('Paris');
     $user2->setCitySlug('paris');
     $user2->setCreatedAt(new \DateTimeImmutable());
+    $user2->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
 
     $manager->persist($user2);
 
@@ -64,6 +66,7 @@ class AppFixtures extends Fixture
     $user3->setCity('Marseille');
     $user3->setCitySlug('marseille');
     $user3->setCreatedAt(new \DateTimeImmutable());
+    $user3->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
 
     $manager->persist($user3);
 
@@ -79,6 +82,7 @@ class AppFixtures extends Fixture
     $user4->setCity('Lyon');
     $user4->setCitySlug('lyon');
     $user4->setCreatedAt(new \DateTimeImmutable());
+    $user4->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
 
     $manager->persist($user4);
 
