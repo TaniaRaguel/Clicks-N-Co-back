@@ -241,20 +241,6 @@ class AppFixtures extends Fixture
                 $category4->setCreatedAt(new \DateTimeImmutable());
 
                 $manager->persist($category4);
-            
-
-
-
-
-        
-
-
-
-
-
-
-
-
 
         $manager->flush();
     }
