@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Order
 {
     /**
+     * @Groups({"orderline_browse", "orderline_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")

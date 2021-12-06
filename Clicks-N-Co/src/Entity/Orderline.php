@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Orderline
 {
     /**
+     * @Groups({"orderline_browse", "orderline_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,18 +21,21 @@ class Orderline
     private $id;
 
     /**
+     * @Groups({"orderline_browse", "orderline_read"})
      * @ORM\Column(type="integer")
      * @Groups({"order_read"})
      */
     private $quantity;
 
     /**
+     * @Groups({"orderline_browse", "orderline_read"})
      * @ORM\Column(type="float")
      * @Groups({"order_read"})
      */
     private $price;
 
     /**
+     * @Groups({"orderline_browse", "orderline_read"})
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orderlines")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"order_read"})
@@ -39,6 +43,7 @@ class Orderline
     private $product;
 
     /**
+     * @Groups({"orderline_browse", "orderline_read"})
      * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="orderlines")
      * @ORM\JoinColumn(nullable=false)
      */
