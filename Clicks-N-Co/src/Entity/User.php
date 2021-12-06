@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -23,16 +24,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user_read"})
      */
     private $roles = [];
 
@@ -45,32 +49,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @Groups({ "shop_add"})
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $lastname;
 
     /**
      * @Groups({ "shop_add"})
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Groups({"user_read"})
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_read"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Groups({"user_read"})
      */
     private $zip_code;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"user_read"})
      */
     private $city;
 
@@ -91,19 +101,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Shop::class, mappedBy="user")
+     * @Groups({"user_read"})
      */
     private $shops;
 
     /**
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
+     * @Groups({"user_read"})
      */
     private $orders;
 
     /**
      * @Groups({"shop_homeShop","shop_search"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_read"})
      */
     private $avatar;
+
+    public function __construct()
+    {
+        $this->shops = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

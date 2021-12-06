@@ -9,13 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
+
 /**
  * @ORM\Entity(repositoryClass=ShopRepository::class)
  */
 class Shop
 {
     /**
-     * @Groups({"shop_homeShop","shop_read", "shop_add", "shop_search"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop","shop_read", "shop_add", "shop_search"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,7 +24,7 @@ class Shop
     private $id;
 
     /**
-     * @Groups({"shop_homeShop", "shop_read", "shop_add", "shop_search"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop", "shop_read", "shop_add", "shop_search"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
