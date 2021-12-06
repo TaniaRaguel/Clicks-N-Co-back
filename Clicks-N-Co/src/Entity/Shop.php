@@ -6,6 +6,8 @@ use App\Repository\ShopRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=ShopRepository::class)
@@ -13,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Shop
 {
     /**
+     * @Groups({"shop_homeShop",})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,6 +23,7 @@ class Shop
     private $id;
 
     /**
+     * @Groups({"shop_homeShop",})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -30,11 +34,13 @@ class Shop
     private $description;
 
     /**
+     * @Groups({"shop_homeShop",})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
     /**
+     * @Groups({"shop_homeShop",})
      * @ORM\Column(type="string", length=255)
      */
     private $address;
@@ -100,6 +106,7 @@ class Shop
     private $orders;
 
     /**
+     * @Groups({"shop_homeShop",})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shops")
      * @ORM\JoinColumn(nullable=false)
      */

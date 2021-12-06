@@ -6,6 +6,7 @@ use App\Entity\Shop;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @method Shop|null find($id, $lockMode = null, $lockVersion = null)
  * @method Shop|null findOneBy(array $criteria, array $orderBy = null)
@@ -18,6 +19,33 @@ class ShopRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Shop::class);
     }
+
+
+/**
+ * return the 5 random shops on the homepage
+ *
+ * @return Shop[] Returns an array of Shop objects
+ */
+    public function FindHomeShop ()
+    {
+               
+            return
+
+
+             $this->createQueryBuilder('shop')
+
+            
+             
+            ->orderBy('RAND()')
+            ->setMaxResults(5)
+
+            ->getQuery()
+            ->getResult()
+        ;
+              
+        
+    }
+
 
     // /**
     //  * @return Shop[] Returns an array of Shop objects
