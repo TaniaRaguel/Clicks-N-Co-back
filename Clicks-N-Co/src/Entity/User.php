@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 
 /**
@@ -18,6 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
+     *  @Groups({ "shop_add"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -44,12 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @Groups({ "shop_add"})
      * @ORM\Column(type="string", length=255)
      * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $lastname;
 
     /**
+     * @Groups({ "shop_add"})
      * @ORM\Column(type="string", length=255)
      * @Groups({"user_read", "order_browse", "order_read"})
      */
@@ -107,6 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $orders;
 
     /**
+     * @Groups({"shop_homeShop","shop_search"})
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"user_read"})
      */
