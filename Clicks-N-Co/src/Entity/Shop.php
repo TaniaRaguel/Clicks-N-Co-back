@@ -6,6 +6,7 @@ use App\Repository\ShopRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ShopRepository::class)
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Shop
 {
     /**
+     * @Groups({"product_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,6 +22,7 @@ class Shop
     private $id;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;

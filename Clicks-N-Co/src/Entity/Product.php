@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
     /**
+     * @Groups({"product_browse", "product_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,46 +22,55 @@ class Product
     private $id;
 
     /**
+     * @Groups({"product_browse", "product_read"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="string", length=64)
      */
     private $uc;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="float")
      */
     private $price;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="integer", options={"default":0})
      */
     private $stock;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")
      */
     private $tags;
@@ -70,6 +81,7 @@ class Product
     private $orderlines;
 
     /**
+     * @Groups({"product_read"})
      * @ORM\ManyToOne(targetEntity=Shop::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
