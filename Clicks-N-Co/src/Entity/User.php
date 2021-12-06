@@ -21,19 +21,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user_read")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("user_read")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $roles = [];
 
@@ -45,37 +45,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user_read")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user_read")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=32)
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=32)
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $zip_code;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $city;
 
@@ -96,19 +96,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Shop::class, mappedBy="user")
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $shops;
 
     /**
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $orders;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("user_read")
+     * @Groups({"user_read"})
      */
     private $avatar;
 

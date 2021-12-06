@@ -6,6 +6,7 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -17,21 +18,25 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $total_price;
 
     /**
      * @ORM\Column(type="smallint", options={"default":0})
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"user_read", "order_browse", "order_read"})
      */
     private $createdAt;
 
@@ -43,23 +48,27 @@ class Order
     /**
      * @ORM\ManyToOne(targetEntity=Shop::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"order_browse", "order_read"})
      */
     private $shop;
 
     /**
      * @ORM\OneToMany(targetEntity=Orderline::class, mappedBy="orderRef")
+     * @Groups({"order_read"})
      */
     private $orderlines;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"order_browse", "order_read"})
      */
     private $user;
 
     public function __construct()
     {
         $this->orderlines = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

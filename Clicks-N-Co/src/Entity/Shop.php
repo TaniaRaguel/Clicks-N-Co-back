@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Shop
 {
     /**
-     * @Groups({"product_read"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,7 +22,7 @@ class Shop
     private $id;
 
     /**
-     * @Groups({"product_read"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
