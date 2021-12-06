@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/api/v1/orderline", name="api_v1_orderline_", requirements={"id"="\d+"})
+ * @Route("/api/v1/orderlines", name="api_v1_orderline_", requirements={"id"="\d+"})
  */
 class OrderlineController extends AbstractController
 {
