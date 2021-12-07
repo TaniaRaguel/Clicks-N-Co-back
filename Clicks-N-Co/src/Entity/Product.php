@@ -13,8 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Product
 {
+
   /**
-   * @Groups({"product_browse", "product_read", "order_read", "orderline_browse", "orderline_read"})
+   * @Groups({"product_browse", "product_read", "order_read", "orderline_browse", "orderline_read", "shop_read"})
    * @ORM\Id
    * @ORM\GeneratedValue
    * @ORM\Column(type="integer")
@@ -22,31 +23,31 @@ class Product
   private $id;
 
   /**
-   * @Groups({"product_browse", "product_read", "order_read", "orderline_browse", "orderline_read"})
+   * @Groups({"product_browse", "product_read", "order_read", "orderline_browse", "orderline_read", "shop_read"})
    * @ORM\Column(type="string", length=255)
    */
   private $name;
 
   /**
-   * @Groups({"product_read", "orderline_read"})
+   * @Groups({"product_read", "orderline_read", "shop_read"})
    * @ORM\Column(type="string", length=255)
    */
   private $description;
 
   /**
-   * @Groups({"product_read", "orderline_browse", "orderline_read"})
+   * @Groups({"product_read", "orderline_browse", "orderline_read", "shop_read"})
    * @ORM\Column(type="string", length=64)
    */
   private $uc;
 
   /**
-   * @Groups({"product_read", "orderline_browse", "orderline_read"})
+   * @Groups({"product_read", "orderline_browse", "orderline_read", "shop_read"})
    * @ORM\Column(type="float")
    */
   private $price;
 
   /**
-   * @Groups({"product_read", "orderline_browse", "orderline_read"})
+   * @Groups({"product_read", "orderline_browse", "orderline_read", "shop_read"})
    * @ORM\Column(type="string", length=255, nullable=true)
    */
   private $picture;
@@ -207,6 +208,7 @@ class Product
   {
     if (!$this->tags->contains($tag)) {
       $this->tags[] = $tag;
+
     }
 
     return $this;

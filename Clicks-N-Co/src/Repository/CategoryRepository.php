@@ -19,6 +19,27 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+
+/**
+ * return the 3 random categories on the homepage
+ *
+ * @return Category[] Returns an array of categories objects
+ */
+public function FindHomeCategory ()
+{
+           
+        return
+         $this->createQueryBuilder('category')
+        /* ->orderBy('RAND()') */
+        ->setMaxResults(3)
+
+        ->getQuery()
+        ->getResult()
+    ;
+          
+    
+}
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */

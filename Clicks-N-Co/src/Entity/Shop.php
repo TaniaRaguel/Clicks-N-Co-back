@@ -8,13 +8,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
+
 /**
  * @ORM\Entity(repositoryClass=ShopRepository::class)
  */
 class Shop
 {
     /**
-     * @Groups({"user_read", "product_read", "order_browse", "order_read"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop","shop_read" , "shop_search","shop_browse"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,52 +24,62 @@ class Shop
     private $id;
 
     /**
-     * @Groups({"user_read", "product_read", "order_browse", "order_read"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop", "shop_read", "shop_search","shop_browse"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * 
+     * @Groups({"shop_read"})
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
+     * @Groups({"shop_homeShop","shop_read","shop_search","shop_browse"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
     /**
+     * @Groups({"shop_homeShop","shop_read","shop_search", "shop_browse"})
      * @ORM\Column(type="string", length=255)
      */
     private $address;
 
     /**
+     * @Groups({"shop_homeShop","shop_read", "shop_browse", "shop_search" })
      * @ORM\Column(type="string", length=64)
      */
     private $zip_code;
 
     /**
+     * @Groups({"shop_homeShop","shop_read", "shop_browse", "shop_search"})
      * @ORM\Column(type="string", length=64)
      */
     private $city;
 
     /**
+     * @Groups({"shop_homeShop","shop_read", "shop_browse", "shop_search" })
      * @ORM\Column(type="string", length=64)
      */
     private $city_slug;
 
     /**
+     *  @Groups({"shop_homeShop","shop_read", "shop_browse", "shop_search"})
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Groups({"shop_read"})
      * @ORM\Column(type="string", length=32)
      */
     private $phone_number;
 
     /**
+     * @Groups({"shop_read", "shop_search"})
      * @ORM\Column(type="string", length=128)
      */
     private $opening_hours;
@@ -88,12 +100,14 @@ class Shop
     private $updatedAt;
 
     /**
+     * @Groups({"shop_read"})
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="shop")
      */
     private $products;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="shops")
+     * @Groups({"shop_read"})
      */
     private $categories;
 
@@ -103,6 +117,7 @@ class Shop
     private $orders;
 
     /**
+     * @Groups({"shop_homeShop","shop_search", "shop_read" ,"shop_browse"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shops")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -113,6 +128,8 @@ class Shop
         $this->products = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+
     }
 
     public function getId(): ?int
