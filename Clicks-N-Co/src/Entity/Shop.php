@@ -85,7 +85,6 @@ class Shop
     private $opening_hours;
 
     /**
-     *  
      * @ORM\Column(type="string", length=255)
      */
     private $name_slug;
