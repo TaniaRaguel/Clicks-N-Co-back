@@ -33,7 +33,7 @@ class ShopController extends AbstractController
      */
     public function homeShop(ShopRepository $shopRepository): Response
     {
-
+        // dd($shopRepository->FindHomeShop());
         return $this->json($shopRepository->FindHomeShop(),200, [], [
             'groups'=> ['shop_homeShop']
 

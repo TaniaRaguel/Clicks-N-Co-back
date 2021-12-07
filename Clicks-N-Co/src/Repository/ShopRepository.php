@@ -5,9 +5,7 @@ namespace App\Repository;
 use App\Entity\Shop;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use DoctrineExtensions\Query\Mysql\Rand;
-use Doctrine\ORM\Query\SqlWalker;
-use \Doctrine\Common\ClassLoader;
+
 
 /**
  * @method Shop|null find($id, $lockMode = null, $lockVersion = null)
@@ -31,14 +29,16 @@ class ShopRepository extends ServiceEntityRepository
     public function FindHomeShop ()
     {
                
-            return
-             $this->createQueryBuilder('shop')
-            ->orderBy('RAND()')
-            ->setMaxResults(5)
-
-            ->getQuery()
-            ->getResult()
-        ;
+        $manager = $this->getEntityManager();
+        $query = $manager->createQuery(
+            'SELECT shop
+            FROM App\Entity\Shop shop
+            ORDER BY RAND()
+            '
+        )
+        ->setMaxResults(5);
+   
+    return $query->getResult();
               
         
     }
