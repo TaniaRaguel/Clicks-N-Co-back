@@ -33,7 +33,7 @@ class ShopRepository extends ServiceEntityRepository
                
             return
              $this->createQueryBuilder('shop')
-            /* ->orderBy('RAND()') */
+            ->orderBy('RAND()')
             ->setMaxResults(5)
 
             ->getQuery()
