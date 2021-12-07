@@ -135,7 +135,7 @@ class AppFixtures extends Fixture
       $shop->setAddress($generator->numberBetween(1, 50) . ' rue de ' . $generator->unique()->word());
       $shop->setZipCode($generator->randomElement(['60803', '70120', '56550', '07530', '64470']));
       $shop->setCity($generator->unique()->city());
-      $shop->setCitySlug($generator->unique()->city());
+      $shop->setCitySlug($generator->randomElement(['Lille', 'Beauvais', 'Rochefort', 'Paris', 'Marseille', 'Toulouse']));
       $shop->setEmail('john@gmail.com');
       $shop->setPhoneNumber('06 78 51 42 52');
       $shop->setOpeningHours("Ouvert du lundi au vendredi de 9h à 17h");
