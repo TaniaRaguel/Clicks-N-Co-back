@@ -6,6 +6,8 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -13,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
+     * @Groups({"category_browse", "category_read", "category_home"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,12 +23,14 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+    * @Groups({"category_browse", "category_read","category_home", "shop_read"})
+     *  @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"category_browse", "category_read", "category_home","shop_read"})
+     *  @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -47,6 +52,7 @@ class Category
     public function __construct()
     {
         $this->shops = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

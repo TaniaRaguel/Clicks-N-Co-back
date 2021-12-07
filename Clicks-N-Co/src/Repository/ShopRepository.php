@@ -60,6 +60,8 @@ class ShopRepository extends ServiceEntityRepository
             'SELECT shop
              FROM App\Entity\shop shop
              WHERE shop.city LIKE :searchTerm
+             
+
             '
         )
             // On prépare le paramètre (nettoyage de sécurité)
