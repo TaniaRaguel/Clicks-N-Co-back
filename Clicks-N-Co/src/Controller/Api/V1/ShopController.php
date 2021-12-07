@@ -15,9 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @route("/api/v1/shops",  name="api_v1_shop", requirements={"id"="\d+"}) 
+ * @route("/api/v1/shops",  name="api_v1_shop_", requirements={"id"="\d+"}) 
  */
-class shopController extends AbstractController
+class ShopController extends AbstractController
 {
 
     private $manager;
@@ -29,7 +29,7 @@ class shopController extends AbstractController
 
 
     /**
-     * @Route("/home_shop", name="home_shop", methods={"GET"})
+     * @Route("/home", name="home_shop", methods={"GET"})
      */
     public function homeShop(ShopRepository $shopRepository): Response
     {
@@ -39,6 +39,25 @@ class shopController extends AbstractController
 
         ]);
         
+    }
+
+
+    /**
+     * 
+     *show all shop
+     *
+     * @route("", name="browse", methods={"GET"})
+     * 
+     * @param Shop $shop
+     * 
+     * @return void
+     */
+    public function browse( ShopRepository $shopRepository)
+    {
+        return $this->json($shopRepository->findAll(), 200, [],
+        [ 'groups' => ['shop_browse']
+
+        ]);
     }
 
 
@@ -166,17 +185,17 @@ class shopController extends AbstractController
     /**
      * search every shop matching the search city
      * 
-     * @route("/search", name="search", methods={"POST"})
+     * @route("/searchbycity", name="search", methods={"POST"})
      *
      * @param Request $request
      * @param ShopRepository $shopRepository
      * @return Response
      */
-    public function results(Request $request, ShopRepository $shopRepository): Response
+    public function resultsByCity(Request $request, ShopRepository $shopRepository): Response
     {
        
-        $searchCity = $request->get('search');
-
+       /*  $searchCity = $request->get('search'); */
+       $searchCity = 'marin';
         
 
         // 3) On transmet le résultat à la vue HTML
