@@ -27,7 +27,7 @@ class CategoryController extends AbstractController
 
       /**
      * show 3 categories on the homepage
-     * @Route("home", name="home",  methods={"GET"})
+     * @Route("/home", name="home",  methods={"GET"})
      */
     public function homeCategory(CategoryRepository $categoryRepository): Response
     {

@@ -20,25 +20,24 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
 
-/**
- * return the 3 random categories on the homepage
- *
- * @return Category[] Returns an array of categories objects
- */
-public function FindHomeCategory ()
-{
-           
-        return
-         $this->createQueryBuilder('category')
-        /* ->orderBy('RAND()') */
-        ->setMaxResults(3)
+    /**
+     * return the 3 random categories on the homepage
+     *
+     * @return Category[] Returns an array of categories objects
+     */
+    public function FindHomeCategory()
+    {
+        $manager = $this->getEntityManager();
+        $query = $manager->createQuery(
+            'SELECT category
+        FROM App\Entity\Category category
+        ORDER BY RAND()
+        '
+        )
+            ->setMaxResults(3);
 
-        ->getQuery()
-        ->getResult()
-    ;
-          
-    
-}
+        return $query->getResult();
+    }
 
     // /**
     //  * @return Category[] Returns an array of Category objects
