@@ -6,6 +6,8 @@
     ],
 
 
+
+
     "content-hash": "6861a522918c36e3fdeba8b61beb4c07",
 
     "packages": [
@@ -10377,5 +10379,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

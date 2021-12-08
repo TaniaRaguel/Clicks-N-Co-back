@@ -195,12 +195,13 @@ class ShopController extends AbstractController
     {
        
        /*  $searchCity = $request->get('search'); */
-       $searchCity = 'marin';
+       $jsonArray = json_decode($request->getContent(), true);
+       $searchCity = trim($jsonArray["searchValue"]);
         
 
         // 3) On transmet le résultat à la vue HTML
         return $this->json($shopRepository->findAllBySearchTermDQL($searchCity), 200, [], [
-            'groups' => ['shop_search']
+            'groups' => ['shop_search'],
             
         ]);
     }
