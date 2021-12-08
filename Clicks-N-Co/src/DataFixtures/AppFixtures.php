@@ -116,7 +116,7 @@ class AppFixtures extends Fixture
 
     $category4 = new Category();
     $category4->setname('épicerie');
-    $category4->setpicture('category' . $generator->numberBetween(1, 10) . '.png');
+    $category4->setpicture('http://localhost:8080/images/category' . $generator->numberBetween(1, 3) . '.jpg');
     $category4->setCreatedAt(new \DateTimeImmutable());
 
     $manager->persist($category4);
@@ -129,12 +129,12 @@ class AppFixtures extends Fixture
 
       $shop = new shop;
 
-      $shop->setName('la boutique de' . $generator->unique()->firstname());
+      $shop->setName('la boutique de ' . $generator->unique()->firstname());
       $shop->setDescription($generator->unique()->text(15));
-      $shop->setpicture('shop' . $generator->numberBetween(1, 10) . '.png');
+      $shop->setpicture('http://localhost:8080/images/shop' . $generator->numberBetween(1, 2) . '.jpg');
       $shop->setAddress($generator->numberBetween(1, 50) . ' rue de ' . $generator->unique()->word());
       $shop->setZipCode($generator->randomElement(['60803', '70120', '56550', '07530', '64470']));
-      $shop->setCity($generator->unique()->city());
+      $shop->setCity($generator->randomElement(['Lille', 'Beauvais', 'Rochefort', 'Paris', 'Marseille', 'Toulouse']));
       $shop->setCitySlug($generator->randomElement(['Lille', 'Beauvais', 'Rochefort', 'Paris', 'Marseille', 'Toulouse']));
       $shop->setEmail('john@gmail.com');
       $shop->setPhoneNumber('06 78 51 42 52');
@@ -191,7 +191,7 @@ class AppFixtures extends Fixture
       $product->setDescription($generator->unique()->sentence($nbWords = 10, $variableNbWords = true), '.');
       $product->setUc($generator->randomElement(['Kg', 'Litres', 'Carton']));
       $product->setPrice($generator->randomFloat(2));
-      $product->setPicture($generator->imageUrl(360, 360, 'Product', true));
+      $product->setPicture('http://localhost:8080/images/product' . $generator->numberBetween(1, 3) . '.jpg');
       $product->setStock(0);
       $product->setCreatedAt(new \DateTimeImmutable());
       // récupérer le shop fixture quand ce sera fait
