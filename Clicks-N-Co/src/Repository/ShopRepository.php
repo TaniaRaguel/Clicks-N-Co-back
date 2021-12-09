@@ -36,7 +36,7 @@ class ShopRepository extends ServiceEntityRepository
             ORDER BY RAND()
             '
         )
-        ->setMaxResults(5);
+        ->setMaxResults(4);
    
     return $query->getResult();
               
