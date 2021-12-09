@@ -75,9 +75,7 @@ class ShopController extends AbstractController
     public function read( Shop $shop)
     {
         return $this->json($shop, 200, [],
-        [ 'groups' => ['shop_read']
-
-        ]);
+        [ 'groups' => ['shop_read']]);
     }
 
 
