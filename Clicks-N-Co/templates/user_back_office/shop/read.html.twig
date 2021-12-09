@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ shop.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ shop.name }}</h1>
+    <img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin">
+    <p>{{ shop.description }}</p>
+
+    <h3>Adresse</h3>
+    <p>{{ shop.address }}</p>
+    <p>{{ shop.zipcode }}</p>
+    <p>{{ shop.city }}</p>
+
+    <h3>Contact</h3>
+    <p>{{ shop.email }}</p>
+    <p>{{ shop.phonenumber }}</p>
+
+    <h3>Horaires d'ouvertures</h3>
+    <p>{{ shop.openinghours }}</p>
+{% endblock %}
