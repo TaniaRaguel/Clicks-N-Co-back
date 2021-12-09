@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer une produit !{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Editer un produit</h1>
+</div>
+
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.uc) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.picture) }}
+    {{ form_row(form.stock) }}
+    {{ form_row(form.tags) }}
+    {{ form_row(form.shop) }}
+    {# On peut tout à fait insérer le bouton dans le twig plutot que dans le formulaire #}
+    <button>Ajouter</button>
+{{ form_end(form) }}
+
+{% endblock %}
