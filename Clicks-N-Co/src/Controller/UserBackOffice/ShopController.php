@@ -24,7 +24,7 @@ class ShopController extends AbstractController
      * @Route("/{name_slug}", name="read")
      */
     public function read(Shop $shop): Response
-    {
+    {   
         return $this->render('user_back_office/shop/read.html.twig', [
             'shop' => $shop,
             'user' => $shop->getUser(),
