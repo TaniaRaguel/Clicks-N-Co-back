@@ -22,6 +22,8 @@
 	<h3>Horaires d'ouvertures</h3>
 	<p>{{ shop.openinghours }}</p>
 
+  	<h3><a href="{{ path('user_backoffice_order_read', {id: shop.id}) }}">Vos commandes</a></h3>
+
 	<h3>Vos produits</h3>
 	<a href="{{ path('user_backoffice_product_add', {id: shop.id}) }}">Ajouter</a>
 
