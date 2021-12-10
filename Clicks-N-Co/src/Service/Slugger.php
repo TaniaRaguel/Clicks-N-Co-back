@@ -70,6 +70,6 @@ class Slugger
         $name = $shop->getName();
         $slug = $this->slugify($name);
 
-        $shop->setName_slug($slug);
+        $shop->setNameSlug($slug);
     }
 }
