@@ -3,6 +3,8 @@
 {% block body %}
 	<div class="col-12">
 		<h1>Ajouter un magasin</h1>
+		<a href="{{ path('user_backoffice_user_read', {id: user.id}) }}">Retour</a>
+
 	</div>
 	{{ form_start(form) }}
 	{{ form_row(form) }}

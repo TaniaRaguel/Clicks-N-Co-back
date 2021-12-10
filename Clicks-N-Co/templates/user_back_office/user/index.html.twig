@@ -9,12 +9,14 @@
 
 
 		<label for="shop-select">votre magasin</label>
+		<a href="{{ path('user_backoffice_shop_add', {id: user.id}) }}">Ajouter</a>
 
 
 		{% for shop in shops %}
 			<ul>
-				<li><a href="{ path('user_backoffice_shop', {'name_slug': shop.name_slug} ) }} ">{{ shop.name }}{{ loop.last != true ? ',' }}</a></li>
-
+				<li><a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }} ">{{ shop.name }}{{ loop.last != true ? ',' }}</a><a href="{{ path('user_backoffice_shop_edit', {'name_slug': shop.nameslug}) }}">Editer</a></li>
+			
+				
 			</ul>
 
 
@@ -51,39 +53,5 @@
 		</div>
 
 
-		<h2>Vos produits</h2>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-
-					<th>nom</th>
-					<th>Description</th>
-					<th>UC</th>
-					<th>Prix</th>
-					<th>image</th>
-					<th>stock</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr>
-
-					<td></td>
-					<td>Description</td>
-					<td>UC</td>
-					<td>Prix</td>
-					<td>image</td>
-					<td>stock</td>
-
-					<td>
-						<a href="">Modifier</a>
-					</td>
-
-
-				</tr>
-
-
-			</tbody>
-		</table>
 	</div>
 {% endblock %}
