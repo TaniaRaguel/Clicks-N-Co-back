@@ -7,6 +7,7 @@ use App\Service\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -17,7 +18,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, JsonSerializable
 {
     /**
      *  
@@ -123,6 +124,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->shops = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+        'firstname' => $this->getFirstname(),
+        'lastname' => $this->getLastname(),
+        'email' => $this->getUserIdentifier(),
+        'phone_number' => $this->getPhoneNumber(),
+        'address' => $this->getAddress(),
+        'zip_code' => $this->getZipCode(),
+        'city' => $this->getCity(),
+        ];
     }
 
     public function __toString()
