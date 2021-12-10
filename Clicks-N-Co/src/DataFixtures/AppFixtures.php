@@ -139,7 +139,7 @@ class AppFixtures extends Fixture
       $shop->setEmail('john@gmail.com');
       $shop->setPhoneNumber('06 78 51 42 52');
       $shop->setOpeningHours("Ouvert du lundi au vendredi de 9h à 17h");
-      $shop->setName_slug('la boutique de ' . $generator->unique()->firstname());
+      $shop->setNameSlug('la boutique de ' . $generator->unique()->firstname());
       $shop->setUser($generator->randomElement([$user1, $user2, $user3, $user4]));
       $shop->setCreatedAt(new \DateTimeImmutable());
       $shop->addCategory($generator->randomElement([$category1, $category2, $category3, $category4]));

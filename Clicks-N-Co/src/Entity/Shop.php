@@ -85,6 +85,7 @@ class Shop
     private $opening_hours;
 
     /**
+     * @Groups({"shop_read"})
      * @ORM\Column(type="string", length=255)
      */
     private $name_slug;
@@ -130,6 +131,11 @@ class Shop
         $this->orders = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
 
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -260,7 +266,7 @@ class Shop
     /**
      * Get the value of name_slug
      */ 
-    public function getName_slug()
+    public function getNameSlug(): ?string
     {
         return $this->name_slug;
     }
@@ -270,7 +276,7 @@ class Shop
      *
      * @return  self
      */ 
-    public function setName_slug($name_slug)
+    public function setNameSlug(string $name_slug): self
     {
         $this->name_slug = $name_slug;
 
