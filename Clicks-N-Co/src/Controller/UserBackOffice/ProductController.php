@@ -52,7 +52,9 @@ class ProductController extends AbstractController
       $manager->persist($product);
       $manager->flush();
 
-      // return $this->redirectToRoute(''); faire redirection sur shop_read ?
+      return $this->redirectToRoute('user_backoffice_shop_read', [
+        'name_slug' => $shop->getNameSlug(),
+      ]); 
     }
 
     return $this->render('user_back_office/product/edit.html.twig', [
@@ -84,7 +86,9 @@ class ProductController extends AbstractController
       $manager->persist($product);
       $manager->flush();
 
-      // return $this->redirectToRoute('') faire redirection sur shop_read ?
+      return $this->redirectToRoute('user_backoffice_shop_read', [
+        'name_slug' => $shop->getNameSlug(),
+      ]); 
     }
 
     return $this->render('user_back_office/product/add.html.twig', [
@@ -99,11 +103,14 @@ class ProductController extends AbstractController
    */
   public function delete(EntityManagerInterface $manager, Product $product)
   {
+    $shop = $product->getShop();
 
     $manager->remove($product);
     $manager->flush();
 
 
-    // return $this->redirectToRoute('') faire redirection sur shop_read ?
+    return $this->redirectToRoute('user_backoffice_shop_read', [
+      'name_slug' => $shop->getNameSlug(),
+    ]);
   }
 }

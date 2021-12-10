@@ -41,6 +41,8 @@ class ShopController extends AbstractController
      */
     public function edit(EntityManagerInterface $manager, Request $request, Shop $shop, Slugger $slugger)
     {
+        $user = $shop->getUser();
+       
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
 
@@ -48,15 +50,18 @@ class ShopController extends AbstractController
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
+            
 
             $manager->flush();
 
-            return $this->redirectToRoute('user_backoffice_shop_browse');
+            return $this->redirectToRoute('user_backoffice_user_read', [
+                'id' => $user->getId(),
+            ]);
         }
 
         return $this->render('user_back_office/shop/edit.html.twig', [
             'form' => $form->createView(),
-            'user' => $shop->getUser(),
+            'user' => $user,
         ]);
     }
 
@@ -82,7 +87,9 @@ class ShopController extends AbstractController
             $manager->persist($shop);
             $manager->flush();
 
-            return $this->redirectToRoute('user_backoffice_shop_browse');
+            return $this->redirectToRoute('user_backoffice_user_read', [
+                'id' => $user->getId(),
+            ]);
         }
 
         return $this->render('user_back_office/shop/add.html.twig', [

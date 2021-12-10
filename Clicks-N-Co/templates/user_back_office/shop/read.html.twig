@@ -1,43 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ shop.name }}{% endblock %}
+{% block title %}
+	{{ shop.name }}
+{% endblock %}
 
 {% block body %}
-    <h1>{{ shop.name }}</h1>
-    <img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin">
-    <p>{{ shop.description }}</p>
+    <a href="{{ path('user_backoffice_user_read', {id: user.id}) }}">Retour</a>
+	<h1>{{ shop.name }}</h1>
+	<img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin">
+	<p>{{ shop.description }}</p>
 
-    <h3>Adresse</h3>
-    <p>{{ shop.address }}</p>
-    <p>{{ shop.zipcode }}</p>
-    <p>{{ shop.city }}</p>
+	<h3>Adresse</h3>
+	<p>{{ shop.address }}</p>
+	<p>{{ shop.zipcode }}</p>
+	<p>{{ shop.city }}</p>
 
-    <h3>Contact</h3>
-    <p>{{ shop.email }}</p>
-    <p>{{ shop.phonenumber }}</p>
+	<h3>Contact</h3>
+	<p>{{ shop.email }}</p>
+	<p>{{ shop.phonenumber }}</p>
 
-    <h3>Horaires d'ouvertures</h3>
-    <p>{{ shop.openinghours }}</p>
+	<h3>Horaires d'ouvertures</h3>
+	<p>{{ shop.openinghours }}</p>
 
-    <h3>Vos produits</h3>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col">UC</th>
-                <th scope="col">Prix</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-                <tr>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.uc }}</td>
-                    <td>{{ product.price }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<h3>Vos produits</h3>
+	<a href="{{ path('user_backoffice_product_add', {id: shop.id}) }}">Ajouter</a>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Description</th>
+				<th scope="col">UC</th>
+				<th scope="col">Prix</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+				<tr>
+					<td>{{ product.name }}</td>
+					<td>{{ product.description }}</td>
+					<td>{{ product.uc }}</td>
+					<td>{{ product.price }}</td>
+					<td> <a href="{{ path('user_backoffice_product_edit', {id: product.id}) }}">Editer</a></td>
+					<td> <a href="{{ path('user_backoffice_product_delete', {id: product.id}) }}">Supprimer</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

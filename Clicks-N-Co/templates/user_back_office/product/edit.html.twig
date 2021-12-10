@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer {{product.name}} de {{product.shop}}{% endblock %}
+{% block title %}Modifier {{product.name}} de {{product.shop}}{% endblock %}
 
 {% block body %}
 
 <div>
-    <h2>Editer {{product.name}} de {{product.shop}}</h2>
+    <h2>Modifier {{product.name}} de {{product.shop}}</h2>
 </div>
 
 {{ form_start(form) }}
@@ -16,9 +16,8 @@
     {{ form_row(form.picture) }}
     {{ form_row(form.stock) }}
     {{ form_row(form.tags) }}
-    {{ form_row(form.shop) }}
     {# On peut tout à fait insérer le bouton dans le twig plutot que dans le formulaire #}
-    <button>Ajouter</button>
+    <button>Modifier</button>
 {{ form_end(form) }}
 
 {% endblock %}
