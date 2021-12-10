@@ -85,7 +85,7 @@ class Shop
     private $opening_hours;
 
     /**
-     * @Groups({"shop_read"})
+     * @Groups({"shop_homeShop","shop_read", "shop_browse", "shop_search"})
      * @ORM\Column(type="string", length=255)
      */
     private $name_slug;
