@@ -3,6 +3,7 @@
 namespace App\Controller\UserBackOffice;
 
 use App\Entity\Product;
+use App\Entity\Shop;
 use App\Form\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,8 +22,14 @@ class ProductController extends AbstractController
    */
   public function read(Product $product)
   {
+
+    $shop = $product->getShop();
+
+    $user = $shop->getUser();
+
     return $this->render('user_back_office/product/read.html.twig', [
       'product' => $product,
+      'user' => $user,
     ]);
   }
 
@@ -36,6 +43,10 @@ class ProductController extends AbstractController
 
     $form->handleRequest($request);
 
+    $shop = $product->getShop();
+
+    $user = $shop->getUser();
+
     if ($form->isSubmitted() && $form->isValid()) {
 
       $manager->persist($product);
@@ -46,16 +57,22 @@ class ProductController extends AbstractController
 
     return $this->render('user_back_office/product/edit.html.twig', [
       'form' => $form->createView(),
+      'user' => $user,
+      'product' => $product,
     ]);
   }
 
   /**
-   * @Route("/add", name="add")
+   * @Route("/{id}/add", name="add")
    */
-  public function add(Request $request, EntityManagerInterface $manager): Response
+  public function add(Request $request, EntityManagerInterface $manager, Shop $shop): Response
   {
 
     $product = new Product();
+
+    $product->getShop();
+
+    $user = $shop->getUser();
 
     $form = $this->createForm(ProductType::class, $product);
 
@@ -63,7 +80,7 @@ class ProductController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
 
-
+      $product->setShop(($shop));
       $manager->persist($product);
       $manager->flush();
 
@@ -72,19 +89,21 @@ class ProductController extends AbstractController
 
     return $this->render('user_back_office/product/add.html.twig', [
       'form' => $form->createView(),
+      'user' => $user,
+      'shop' => $shop,
     ]);
   }
 
   /**
-     * @Route("/delete/{id}", name="delete")
-     */
-    public function delete(EntityManagerInterface $manager, Product $product)
-    {
-       
-        $manager->remove($product);
-        $manager->flush();
+   * @Route("/delete/{id}", name="delete")
+   */
+  public function delete(EntityManagerInterface $manager, Product $product)
+  {
 
-       
-        // return $this->redirectToRoute('') faire redirection sur shop_read ?
-    }
+    $manager->remove($product);
+    $manager->flush();
+
+
+    // return $this->redirectToRoute('') faire redirection sur shop_read ?
+  }
 }
