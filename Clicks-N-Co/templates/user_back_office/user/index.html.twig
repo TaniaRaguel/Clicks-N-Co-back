@@ -3,18 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+
 
 	<div class="example-wrapper">
 
@@ -24,7 +13,7 @@
 
 		{% for shop in shops %}
 			<ul>
-				<li><ahref="{# { path('user_backoffice_shop', {'name_slug': shop.name_slug} ) }} #}">{{ shop.name }}{{ loop.last != true ? ',' }}</a></li>
+				<li><a href="{ path('user_backoffice_shop', {'name_slug': shop.name_slug} ) }} ">{{ shop.name }}{{ loop.last != true ? ',' }}</a></li>
 
 			</ul>
 
@@ -33,7 +22,7 @@
 
 
 		<section class="profil">Votre profil</section>
-		<span>modifier votre profil</span>
+	
 		<div>
 			<ul>
 				<li>Nom :
@@ -44,14 +33,14 @@
 				<li>email :
 					{{user.email}}</li>
 
-				{# <li>téléphone : {{user.phone_number}}</li> #}
+				 <li>téléphone : {{user.phonenumber}}</li> 
 			</ul>
 			<p>Votre adresse</p>
 			<ul>
 				<li>
 					rue:
 					{{user.address}}</li>
-				{# <li> Code postal: {{user.zip_code}}</li> #}
+				 <li> Code postal: {{user.zipcode}}</li> 
 				<li>
 					Ville:
 					{{user.city}}</li>
