@@ -1,0 +1,17 @@
+ body {
+
+width: 80%;
+margin: 2rem auto;
+
+ }
+
+header{
+
+background: linear-gradient(93deg, #014019 13%, rgba(1, 64, 25, 0.57) 103%);
+padding: 1rem 1rem;
+}
+
+h1{
+color:white
+}
+
