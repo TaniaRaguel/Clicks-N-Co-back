@@ -18,4 +18,26 @@
 
     <h3>Horaires d'ouvertures</h3>
     <p>{{ shop.openinghours }}</p>
+
+    <h3>Vos produits</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">UC</th>
+                <th scope="col">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.uc }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

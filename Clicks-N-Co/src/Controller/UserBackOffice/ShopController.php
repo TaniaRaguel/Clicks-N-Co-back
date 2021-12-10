@@ -19,20 +19,6 @@ class ShopController extends AbstractController
 {
     /**
      * 
-     * Show all user's shops
-     * 
-     * @Route("/user/{id}", name="browse", requirements={"id"="\d+"})
-     */
-    public function browse(User $user): Response
-    {
-        // dd($user);
-        return $this->render('user_back_office/shop/index.html.twig', [
-            'shops' => $user->getShops(),
-        ]);
-    }
-
-    /**
-     * 
      * Show details of one user's shop
      * 
      * @Route("/{name_slug}", name="read")
@@ -41,6 +27,8 @@ class ShopController extends AbstractController
     {
         return $this->render('user_back_office/shop/read.html.twig', [
             'shop' => $shop,
+            'user' => $shop->getUser(),
+            'products' => $shop->getProducts(),
         ]);
     }
 
@@ -68,6 +56,7 @@ class ShopController extends AbstractController
 
         return $this->render('user_back_office/shop/edit.html.twig', [
             'form' => $form->createView(),
+            'user' => $shop->getUser(),
         ]);
     }
 
@@ -75,10 +64,10 @@ class ShopController extends AbstractController
      * 
      * Allow user to add one shop in his backoffice
      *
-     * @route("/add", name="add")
+     * @route("/{id}/add", name="add")
      * 
      */
-    public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger)
+    public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user)
     {
         $shop = new Shop;
         $form = $this->createForm(ShopType::class, $shop);
@@ -88,6 +77,7 @@ class ShopController extends AbstractController
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
+            $shop->setUser($user);
 
             $manager->persist($shop);
             $manager->flush();
@@ -97,6 +87,7 @@ class ShopController extends AbstractController
 
         return $this->render('user_back_office/shop/add.html.twig', [
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 }

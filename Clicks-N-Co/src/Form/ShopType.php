@@ -22,11 +22,8 @@ class ShopType extends AbstractType
             ->add('email')
             ->add('phone_number')
             ->add('opening_hours')
-            
-            
-           
             ->add('categories')
-            ->add('user')
+           
         ;
     }
 
