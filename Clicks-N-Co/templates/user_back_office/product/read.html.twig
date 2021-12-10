@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  {{ product.name }}
+  {{ product.shop }} {{ product.name }}
 {% endblock %}
 
 {% block body %}
   <div>
-    <h1>
-      {{ block('title') }}
-    </h1>
+    <h2>
+      {{ product.shop }} : {{ product.name }}
+    </h2>
   </div>
 
-  <div class="col-8">
+  <div>
     <ul>
       <li>{{ product.name }}</li>
       <li>{{ product.description }}</li>
       <li>{{ product.uc }}</li>
       <li>{{ product.price }}</li>
-      <li><img src="{{ asset ('images/product/' ~ product.picture) }}" /></li>
+      <li><img src="{{ asset ('images/product/' ~ product.picture) }}" alt="photo du produit"/></li>
       <li>{{ product.stock }}</li>
       <li>{{ product.shop }}</li>
     </ul>
