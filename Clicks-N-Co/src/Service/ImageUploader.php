@@ -64,7 +64,7 @@ class ImageUploader
     $newFilename = $this->uploadImage($form, 'picture', $_ENV['IMAGES_CATEGORY']);
 
     // On affecte le nouveau du fichier dans $question
-    $category->setImage($newFilename);
+    $category->setPicture($newFilename);
   }
 
   public function uploadProductImage(Form $form)
@@ -73,7 +73,7 @@ class ImageUploader
 
     $newFilename = $this->uploadImage($form, 'picture', $_ENV['IMAGES_PRODUCT']);
 
-    $product->setImage($newFilename);
+    $product->setPicture($newFilename);
   }
 
   public function uploadShopImage(Form $form)
@@ -82,6 +82,6 @@ class ImageUploader
 
     $newFilename = $this->uploadImage($form, 'picture', $_ENV['IMAGES_SHOP']);
 
-    $shop->setImage($newFilename);
+    $shop->setPicture($newFilename);
   }
 }

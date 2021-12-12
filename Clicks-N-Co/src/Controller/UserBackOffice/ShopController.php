@@ -5,6 +5,7 @@ namespace App\Controller\UserBackOffice;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\ShopType;
+use App\Service\ImageUploader;
 use App\Service\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,7 +49,7 @@ class ShopController extends AbstractController
      * @route("/edit/{name_slug}", name="edit")
      * 
      */
-    public function edit(EntityManagerInterface $manager, Request $request, Shop $shop, Slugger $slugger)
+    public function edit(EntityManagerInterface $manager, Request $request, Shop $shop, Slugger $slugger, ImageUploader $imageUploader)
     {
         $user = $shop->getUser();
        
@@ -56,6 +57,8 @@ class ShopController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+          $imageUploader->uploadShopImage($form);
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
@@ -81,13 +84,15 @@ class ShopController extends AbstractController
      * @route("/{id}/add", name="add")
      * 
      */
-    public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user)
+    public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, ImageUploader $imageUploader)
     {
         $shop = new Shop;
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+          $imageUploader->uploadShopImage($form);
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
