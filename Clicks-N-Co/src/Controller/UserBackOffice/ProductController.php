@@ -61,6 +61,7 @@ class ProductController extends AbstractController
       'form' => $form->createView(),
       'user' => $user,
       'product' => $product,
+      'shop' => $shop,
     ]);
   }
 
