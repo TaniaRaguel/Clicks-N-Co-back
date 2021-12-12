@@ -11,7 +11,27 @@ background: linear-gradient(93deg, #014019 13%, rgba(1, 64, 25, 0.57) 103%);
 padding: 1rem 1rem;
 }
 
-h1{
+.header__title{
 color:white
+}
+
+.command-alert {
+    color: red;
+}
+
+.orders__in_preparation {
+    background-color: sandybrown;
+}
+
+.prepared__orders {
+    background-color: #80dea4;
+}
+
+.archived__orders {
+    background-color: silver;
+}
+
+.new__orders {
+    background-color: lightcoral;
 }
 
