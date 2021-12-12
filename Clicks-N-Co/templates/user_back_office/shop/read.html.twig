@@ -5,9 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ path('user_backoffice_user_read', {id: user.id}) }}">Retour</a>
+	<a href="{{ path('user_backoffice_user_read', {id: user.id}) }}">Retour</a>
 	<h1>{{ shop.name }}</h1>
-	<img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin">
+
+	{% if orders|length >= 1 %}
+		<a class="command-alert" href="{{ path('user_backoffice_order_read', {id: shop.id}) }}">
+			{{ orders|length }}
+			{{ orders|length == 1 ? 'nouvelle commande' : 'nouvelles commandes' }}
+
+		</a>
+	{%  endif %}
+	<div><img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin"></div>
 	<p>{{ shop.description }}</p>
 
 	<h3>Adresse</h3>
@@ -22,7 +30,9 @@
 	<h3>Horaires d'ouvertures</h3>
 	<p>{{ shop.openinghours }}</p>
 
-  	<h3><a href="{{ path('user_backoffice_order_read', {id: shop.id}) }}">Vos commandes</a></h3>
+	<h3>
+		<a href="{{ path('user_backoffice_order_read', {id: shop.id}) }}">Vos commandes</a>
+	</h3>
 
 	<h3>Vos produits</h3>
 	<a href="{{ path('user_backoffice_product_add', {id: shop.id}) }}">Ajouter</a>
@@ -45,8 +55,12 @@
 					<td>{{ product.description }}</td>
 					<td>{{ product.uc }}</td>
 					<td>{{ product.price }}</td>
-					<td> <a href="{{ path('user_backoffice_product_edit', {id: product.id}) }}">Editer</a></td>
-					<td> <a href="{{ path('user_backoffice_product_delete', {id: product.id}) }}">Supprimer</a></td>
+					<td>
+						<a href="{{ path('user_backoffice_product_edit', {id: product.id}) }}">Editer</a>
+					</td>
+					<td>
+						<a href="{{ path('user_backoffice_product_delete', {id: product.id}) }}">Supprimer</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>

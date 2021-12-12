@@ -25,10 +25,19 @@ class ShopController extends AbstractController
      */
     public function read(Shop $shop): Response
     {   
+        $orders = $shop->getOrders();
+        $ordersToPrepare = [];
+        foreach($orders as $order) {
+            if($order->getStatus() == 0) {
+                $ordersToPrepare[] = $order;
+            }
+        }
+
         return $this->render('user_back_office/shop/read.html.twig', [
             'shop' => $shop,
             'user' => $shop->getUser(),
             'products' => $shop->getProducts(),
+            'orders' => $ordersToPrepare,
         ]);
     }
 
