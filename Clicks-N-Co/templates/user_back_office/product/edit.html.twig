@@ -1,23 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier {{product.name}} de {{product.shop}}{% endblock %}
+{% block title %}
+  Modifier {{ product.name }} de {{ product.shop }}
+{% endblock %}
 
 {% block body %}
+  <div>
+    <a href="{{
+      path(
+        'user_backoffice_shop_read',
+        {
+          name_slug: shop.nameslug
+        }
+      )
+      }}">
+      Retour
+    </a>
+    <h2>
+      Modifier {{ product.name }} de {{ product.shop }}
+    </h2>
+  </div>
 
-<div>
-    <h2>Modifier {{product.name}} de {{product.shop}}</h2>
-</div>
-
-{{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.uc) }}
-    {{ form_row(form.price) }}
-    {{ form_row(form.picture) }}
-    {{ form_row(form.stock) }}
-    {{ form_row(form.tags) }}
-    {# On peut tout à fait insérer le bouton dans le twig plutot que dans le formulaire #}
-    <button>Modifier</button>
-{{ form_end(form) }}
-
+  {{ form_start(form) }}
+  {{ form_row(form.name) }}
+  {{ form_row(form.description) }}
+  {{ form_row(form.uc) }}
+  {{ form_row(form.price) }}
+  {{ form_row(form.picture) }}
+  {{ form_row(form.stock) }}
+  {{ form_row(form.tags) }}
+  {# On peut tout à fait insérer le bouton dans le twig plutot que dans le formulaire #}
+  <button>Modifier</button>
+  {{ form_end(form) }}
 {% endblock %}
