@@ -2,6 +2,7 @@
 
 namespace App\Security\Voter\Api\V1;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -9,10 +10,10 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 class UserVoter extends Voter
 {
-  public function __construct(TokenInterface $tokenInterface, JWTTokenManagerInterface $jwtManager)
+  public function __construct(TokenStorageInterface $tokenStorageInterface, JWTTokenManagerInterface $jwtManager)
   {
     $this->jwtManager = $jwtManager;
-    $this->tokenInterface = $tokenInterface;
+    $this->tokenInterface = $tokenStorageInterface;
   }
   protected function supports(string $attribute, $subject): bool
   {
