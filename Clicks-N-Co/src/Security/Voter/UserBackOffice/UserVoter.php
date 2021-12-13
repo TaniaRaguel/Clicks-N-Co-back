@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Security\Voter\UserBackOffice;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -7,6 +8,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+=======
+
 
 class UserVoter extends Voter
 {
@@ -15,18 +18,24 @@ class UserVoter extends Voter
 {
     $this->jwtManager = $jwtManager;
     $this->tokenStorageInterface = $tokenStorageInterface;
+
 }
     protected function supports(string $attribute, $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, ['READ', 'EDIT', 'ADD'])
+
             && $subject instanceof \App\Entity\User; 
+=======
+
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
+
         $decodedJwtToken = $this->jwtManager->decode($this->tokenStorageInterface->getToken());
+
         $user = $decodedJwtToken->getUser();
 
         
@@ -62,11 +71,13 @@ class UserVoter extends Voter
                 // return true or false
                 if($subject->getUser() === $user) {
                     return true;
+
                 }
 
 
 
          
+
         }
 
         return false;

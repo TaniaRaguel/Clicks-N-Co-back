@@ -17,91 +17,96 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractController
 {
-    /**
-     * @Route("", name="add", methods={"POST"})
-     */
-    public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher): Response
-    {
-        $user = new User;
+  /**
+   * @Route("", name="add", methods={"POST"})
+   */
+  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher): Response
+  {
+    $user = new User;
 
-        $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
+    $this->denyAccessUnlessGranted('ADD', $user);
 
-        $jsonArray = json_decode($request->getContent(), true);
+    $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
 
-        $form->submit($jsonArray);
+    $jsonArray = json_decode($request->getContent(), true);
 
-        if ($form->isValid()) {
+    $form->submit($jsonArray);
 
-            $password = $jsonArray['password'];
-            $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
-            $user->setPassword($hashedPassword);
+    if ($form->isValid()) {
 
-            $user->setRoles(['ROLE_USER']);
+      $password = $jsonArray['password'];
+      $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
+      $user->setPassword($hashedPassword);
 
-            $slugger->slugifyUserCity($user);
+      $user->setRoles(['ROLE_USER']);
 
-            $manager->persist($user);
-            $manager->flush();
+      $slugger->slugifyUserCity($user);
 
-            return $this->json($user, 201);
-        }
+      $manager->persist($user);
+      $manager->flush();
 
-        $errorMessages = [];
-        foreach ($form->getErrors(true) as $error) {
-            $errorMessages[] = [
-                'property' => $error->getOrigin()->getName(),
-                'message' => $error->getMessage(),
-            ];
-        }
-        return $this->json($errorMessages, 400);
+      return $this->json($user, 201);
     }
 
-    /**
-     * 
-     * @Route("/{id}", name="edit", methods={"PUT", "PATCH"})
-     * 
-     */
-    public function edit(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, UserPasswordHasherInterface $userPasswordHasher): Response
-    {
-        $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
+    $errorMessages = [];
+    foreach ($form->getErrors(true) as $error) {
+      $errorMessages[] = [
+        'property' => $error->getOrigin()->getName(),
+        'message' => $error->getMessage(),
+      ];
+    }
+    return $this->json($errorMessages, 400);
+  }
 
-        $jsonArray = json_decode($request->getContent(), true);
-        
+  /**
+   * 
+   * @Route("/{id}", name="edit", methods={"PUT", "PATCH"})
+   * 
+   */
+  public function edit(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, UserPasswordHasherInterface $userPasswordHasher): Response
+  {
+    $this->denyAccessUnlessGranted('EDIT', $user);
 
-        $form->submit($jsonArray);
+    $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
 
-        if ($form->isValid()) {
-            $password = $jsonArray['password'];
-            if ($password != null) {
-                $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
-                $user->setPassword($hashedPassword);
-            }
+    $jsonArray = json_decode($request->getContent(), true);
 
-            $slugger->slugifyUserCity($user);
+    $form->submit($jsonArray);
 
-            $manager->flush();
+    if ($form->isValid()) {
+      $password = $jsonArray['password'];
+      if ($password != null) {
+        $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
+        $user->setPassword($hashedPassword);
+      }
 
-            return $this->json($user, 200);
-        }
+      $slugger->slugifyUserCity($user);
 
-        $errorMessages = [];
-        foreach ($form->getErrors(true) as $error) {
-            $errorMessages[] = [
-                'property' => $error->getOrigin()->getName(),
-                'message' => $error->getMessage(),
-            ];
-        }
+      $manager->flush();
 
-        return $this->json($errorMessages, 400);
+      return $this->json($user, 200);
     }
 
-    /**
-     * @Route("/{id}", name="read", methods={"GET"})
-     */
-    public function read(User $user): Response
-    {
-        return $this->json($user, 200, [], [
-            'groups' => ['user_read'],
-        ]);
+    $errorMessages = [];
+    foreach ($form->getErrors(true) as $error) {
+      $errorMessages[] = [
+        'property' => $error->getOrigin()->getName(),
+        'message' => $error->getMessage(),
+      ];
     }
+
+    return $this->json($errorMessages, 400);
+  }
+
+  /**
+   * @Route("/{id}", name="read", methods={"GET"})
+   */
+  public function read(User $user): Response
+  {
+    $this->denyAccessUnlessGranted('ADD', $user);
+
+    return $this->json($user, 200, [], [
+      'groups' => ['user_read'],
+    ]);
+  }
 }

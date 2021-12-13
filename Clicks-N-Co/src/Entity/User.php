@@ -136,6 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JsonSer
         'address' => $this->getAddress(),
         'zip_code' => $this->getZipCode(),
         'city' => $this->getCity(),
+        'roles' => $this->getRoles(),
         ];
     }
 
