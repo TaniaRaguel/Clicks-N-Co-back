@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}">Retour</a>
+	<a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}"><i class="bi bi-arrow-left-square-fill"></i></a>
 	<h1>Commandes de
 		{{ shop.name }}</h1>
 	<h3>A Préparer</h3>
@@ -37,10 +37,8 @@
 							</form>
 						</td>
 						<th scope="col">
-							<p>
-								<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
-									<i class="bi bi-caret-down-fill"></i>
-								</a>
+							<p>	<i class="bi bi-caret-down-fill"></i>
+								<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 							</p>
 						</th>
 					</tr>
