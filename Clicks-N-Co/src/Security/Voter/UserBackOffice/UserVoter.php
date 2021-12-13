@@ -20,7 +20,7 @@ class UserVoter extends Voter
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, ['READ', 'EDIT', 'ADD'])
-            && $subject instanceof \App\Entity\User; gi
+            && $subject instanceof \App\Entity\User;
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
