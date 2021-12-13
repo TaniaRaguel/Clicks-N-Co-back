@@ -101,6 +101,10 @@ class ShopController extends AbstractController
 
         if ($form->isValid()) {
 
+          // trouver un moyen de récupérer le user
+          // $user = $shop->getUser();
+          // $user->setRoles(['ROLE_TRADER']);
+
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
 

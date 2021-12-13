@@ -2,19 +2,12 @@
 
 namespace App\Security\Voter\Api\V1;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 class OrderVoter extends Voter
 {
-  public function __construct(TokenStorageInterface $tokenStorageInterface, JWTTokenManagerInterface $jwtManager)
-  {
-    $this->jwtManager = $jwtManager;
-    $this->tokenStorageInterface = $tokenStorageInterface;
-  }
   protected function supports(string $attribute, $subject): bool
   {
     // replace with your own logic
@@ -25,7 +18,6 @@ class OrderVoter extends Voter
 
   protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
   {
-    $token = $this->jwtManager->decode($this->tokenStorageInterface->getToken());
     $user = $token->getUser();
     // if the user is anonymous, do not grant access
     if (!$user instanceof UserInterface) {

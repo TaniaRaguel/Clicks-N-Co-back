@@ -2,19 +2,12 @@
 
 namespace App\Security\Voter\Api\V1;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 class UserVoter extends Voter
 {
-  public function __construct(TokenStorageInterface $tokenStorageInterface, JWTTokenManagerInterface $jwtManager)
-  {
-    $this->jwtManager = $jwtManager;
-    $this->tokenInterface = $tokenStorageInterface;
-  }
   protected function supports(string $attribute, $subject): bool
   {
     // replace with your own logic
@@ -25,8 +18,7 @@ class UserVoter extends Voter
 
   protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
   {
-    $decodedJwtToken = $this->jwtManager->decode($this->tokenInterface->getToken());
-    $user = $decodedJwtToken->getUser();
+    $user = $token->getUser();
 
     // if the user is anonymous, do not grant access
     if (!$user instanceof UserInterface) {
@@ -35,28 +27,13 @@ class UserVoter extends Voter
 
     switch ($attribute) {
       case 'READ':
+      case 'EDIT':
+      case 'ADD':
         // logic to determine if the user can READ
         // return true or false
         if ($subject->getUser() === $user) {
           return true;
         }
-
-        break;
-      case 'EDIT':
-        // logic to determine if the user can EDIT
-        // return true or false
-        if ($subject->getUser() === $user) {
-          return true;
-        }
-
-        break;
-      case 'ADD':
-        // logic to determine if the user can ADD
-        // return true or false
-        if ($subject->getUser() === $user) {
-          return true;
-        }
-
         break;
     }
 
