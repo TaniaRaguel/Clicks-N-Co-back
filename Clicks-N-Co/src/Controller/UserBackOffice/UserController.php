@@ -30,6 +30,9 @@ class UserController extends AbstractController
          */
         Public function read (User $user)
         {
+
+            $this->denyAccessUnlessGranted('READ', $user);
+
             $shops = $user->getshops();
             
             return $this->render('user_back_office/user/index.html.twig', [
@@ -47,6 +50,9 @@ class UserController extends AbstractController
      */
     public function edit(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+
+        $this->denyAccessUnlessGranted('EDIT', $user);
+
         $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
 
         $jsonArray = json_decode($request->getContent(), true);
