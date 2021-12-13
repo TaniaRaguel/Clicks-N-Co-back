@@ -1,17 +1,160 @@
- body {
-
+.page-container{
 width: 80%;
-margin: 2rem auto;
-
- }
+padding: 2rem 10rem 2rem 10rem;
+}
 
 header{
 
 background: linear-gradient(93deg, #014019 13%, rgba(1, 64, 25, 0.57) 103%);
 padding: 1rem 1rem;
+
 }
 
-h1{
-color:white
+.footer-container{
+display: flex;
+justify-content: space-between;
 }
+
+.footer__title{
+font-weight: bold;
+font-size: 1rem;    
+}
+
+.footer{
+padding-bottom: 1rem !important;
+}
+
+.footer .has-background-color {
+background-color: darkgray;
+    }
+
+.menu{
+margin-top: 1rem;
+}
+
+.footerlink{
+color:black;
+}
+
+.footerlink:hover{
+color:#1dbf73
+}
+
+.inline{
+display: inline-block;
+padding-left: 0.5*1rem;    
+}
+
+.center{
+display: flex!important;
+flex-direction: column;
+justify-content: center;
+}
+
+
+
+bi{
+color:  #014019;
+font-size: 2rem;
+}
+     
+h1{
+color:white;
+font-size: 2.5rem;
+}
+
+h2{
+    font-size: 1.8rem;
+    
+}
+
+h3{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+.box-container{
+
+background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+padding: 3rem 5rem;
+margin-bottom: 3rem;
+display:flex;
+justify-content: center;   
+}
+
+a:link{
+text-decoration: none;
+color: inherit;
+}
+
+a:visited{
+    color:inherit;
+}
+
+li{
+list-style: none;
+}
+
+.profil-card{
+   
+    background-color: white;
+    border : 0.5px solid rgb(230, 224, 224);
+    max-width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 1rem 0rem 1rem 3rem;
+    padding:2rem 5rem 1rem 2rem;
+    border-radius: 1rem;
+}
+
+.shop-image{
+   box-sizing: content-box;
+    margin: 2rem 0rem 5rem 0rem;
+    border-radius: 1rem;
+    
+
+}
+
+.shop-card{
+   
+   
+    border : 0.5px solid rgb(230, 224, 224);
+    max-width: 100%;
+    margin: 5rem 0rem 5rem 0rem;
+    padding:2rem 5rem 3rem 2rem;
+    border-radius: 1rem;
+}
+
+.form{
+    background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+    padding: 1rem 5rem 1rem 5rem
+
+
+}
+
+.mentions {
+    display: none;
+}
+
+@media screen and (min-width: 1100px) {
+    
+.mentions {
+display: block;
+ margin-top: 5*1rem;
+      }
+.mentions__list {
+display: flex;
+}
+}
+
+
+   
+
+    
+    
+    
+
+
+    
+
 

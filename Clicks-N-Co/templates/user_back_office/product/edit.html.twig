@@ -3,7 +3,7 @@
 {% block title %}
   Modifier {{ product.name }} de {{ product.shop }}
 {% endblock %}
-
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
   <div>
     <a href="{{
@@ -14,12 +14,13 @@
         }
       )
       }}">
-      Retour
+     <i class="bi bi-arrow-left-square-fill"></i>
     </a>
-    <h2>
+ </div>
+     <div class="form"><h2>
       Modifier {{ product.name }} de {{ product.shop }}
     </h2>
-  </div>
+ 
 
   {{ form_start(form) }}
   {{ form_row(form.name) }}
@@ -31,5 +32,6 @@
   {{ form_row(form.tags) }}
   {# On peut tout à fait insérer le bouton dans le twig plutot que dans le formulaire #}
   <button>Modifier</button>
-  {{ form_end(form) }}
+  {{ form_end(form) }}</div>
+    
 {% endblock %}
