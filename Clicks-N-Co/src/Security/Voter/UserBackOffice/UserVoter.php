@@ -8,8 +8,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-=======
-
 
 class UserVoter extends Voter
 {
@@ -27,8 +25,6 @@ class UserVoter extends Voter
         return in_array($attribute, ['READ', 'EDIT', 'ADD'])
 
             && $subject instanceof \App\Entity\User; 
-=======
-
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
