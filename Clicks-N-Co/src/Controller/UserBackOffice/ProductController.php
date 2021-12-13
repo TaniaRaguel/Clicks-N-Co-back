@@ -57,7 +57,9 @@ class ProductController extends AbstractController
 
       return $this->redirectToRoute('user_backoffice_shop_read', [
         'name_slug' => $shop->getNameSlug(),
+
       ]);
+
     }
 
     return $this->render('user_back_office/product/edit.html.twig', [
@@ -65,13 +67,16 @@ class ProductController extends AbstractController
       'user' => $user,
       'product' => $product,
       'shop' => $shop,
+
     ]);
   }
 
   /**
    * @Route("/{id}/add", name="add")
    */
+
   public function add(Request $request, EntityManagerInterface $manager, Shop $shop, ImageUploader $imageUploader): Response
+
   {
 
     $product = new Product();
@@ -94,7 +99,9 @@ class ProductController extends AbstractController
 
       return $this->redirectToRoute('user_backoffice_shop_read', [
         'name_slug' => $shop->getNameSlug(),
+
       ]);
+
     }
 
     return $this->render('user_back_office/product/add.html.twig', [

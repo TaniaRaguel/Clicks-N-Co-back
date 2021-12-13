@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ShopType extends AbstractType
 {
+
   public function buildForm(FormBuilderInterface $builder, array $options): void
   {
     $builder

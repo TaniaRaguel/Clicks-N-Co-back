@@ -26,6 +26,7 @@ class ShopController extends AbstractController
      */
     public function read(Shop $shop): Response
     {   
+
         $orders = $shop->getOrders();
         $ordersToPrepare = [];
         foreach($orders as $order) {
@@ -85,6 +86,7 @@ class ShopController extends AbstractController
      * 
      */
     public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, ImageUploader $imageUploader)
+
     {
         $shop = new Shop;
         $form = $this->createForm(ShopType::class, $shop);
