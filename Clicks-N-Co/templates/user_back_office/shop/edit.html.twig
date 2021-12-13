@@ -1,23 +1,16 @@
 {% extends 'base.html.twig' %}
-
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
   <div class="col-12">
-    <a href="{{
-      path(
-        'user_backoffice_user_read',
-        {
-          id: user.id
-        }
-      )
-      }}">
-      Retour
-    </a>
-    <h2>
+    <a href="{{path('user_backoffice_user_read', { id: user.id }) }}"><i class="bi bi-arrow-left-square-fill"></i></a>
+     </div>
+    <div class="form">   <h2>
       Modifier un magasin
     </h2>
-  </div>
+ 
   {{ form_start(form) }}
   {{ form_row(form) }}
   <button class="btn btn-primary">Modifier</button>
-  {{ form_end(form) }}
+  {{ form_end(form) }}</div>
+ 
 {% endblock %}

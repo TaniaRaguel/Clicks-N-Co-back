@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
   <div class="col-12">
     <a href="{{
@@ -10,14 +10,16 @@
         }
       )
       }}">
-      Retour
+      <i class="bi bi-arrow-left-square-fill"></i>
     </a>
-    <h2>
+  </div>
+     <div class="form"> <h2>
       Ajouter un magasin
     </h2>
-  </div>
+
   {{ form_start(form) }}
   {{ form_row(form) }}
   <button class="btn btn-primary">Ajouter</button>
-  {{ form_end(form) }}
+  {{ form_end(form) }}</div>
+   
 {% endblock %}
