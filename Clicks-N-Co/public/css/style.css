@@ -36,6 +36,7 @@ margin-top: 1rem;
 color:black;
 }
 
+
 .footerlink:hover{
 color:#1dbf73
 }
@@ -156,5 +157,30 @@ display: flex;
 
 
     
+
+
+.header__title{
+color:white
+}
+
+.command-alert {
+    color: red;
+}
+
+.orders__in_preparation {
+    background-color: sandybrown;
+}
+
+.prepared__orders {
+    background-color: #80dea4;
+}
+
+.archived__orders {
+    background-color: silver;
+}
+
+.new__orders {
+    background-color: lightcoral;
+}
 
 

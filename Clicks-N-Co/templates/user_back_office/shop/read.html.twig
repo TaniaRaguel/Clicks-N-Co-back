@@ -5,13 +5,21 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ path('user_backoffice_user_read', {id: user.id}) }}"><i class="bi bi-arrow-left-square-fill"></i></a>
-	
-	
-	<section class="box-container">
+
+	<a href="{{ path('user_backoffice_user_read', {id: user.id}) }}"><i class="bi bi-arrow-left-square-fill"></a>
+<section class="box-container">
 	<div class="profil-card">
 	 <a href="{{ path('user_backoffice_shop_edit', {'name_slug': shop.nameslug}) }}"><i class="bi bi-pencil-square"></i></a></li>
 	<h2>{{ shop.name }}</h2>
+
+	{% if orders|length >= 1 %}
+		<a class="command-alert" href="{{ path('user_backoffice_order_read', {id: shop.id}) }}">
+			{{ orders|length }}
+			{{ orders|length == 1 ? 'nouvelle commande' : 'nouvelles commandes' }}
+
+		</a>
+	{%  endif %}
+	<div><img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin"></div>
 
 	<p>{{ shop.description }}</p>
 
@@ -28,6 +36,7 @@
 	<p>{{ shop.openinghours }}</p>
 	</div>
 
+
 	<div class="shop-image">
 		<img style="width: 400px" src="{{ asset('images/shop/restaurant3.jpg')}}" alt="photo du magasin">
 		</div>
@@ -37,6 +46,7 @@
 </section>
 <div class="order" ><h3><a href="{{ path('user_backoffice_order_read', {id: shop.id}) }}">Vos commandes</a></h3></div>
 	
+
 	<h3>Vos produits</h3>
 
 	
@@ -47,6 +57,7 @@
 			<tr>
 				<th scope="col">Nom</th>
 				<th scope="col">Description</th>
+				<th scope="col">Image</th>
 				<th scope="col">UC</th>
 				<th scope="col">Prix</th>
 				<th scope="col"></th>
@@ -58,10 +69,17 @@
 				<tr>
 					<td>{{ product.name }}</td>
 					<td>{{ product.description }}</td>
+					<td><img style="width: 100px" src="{{ asset ('images/product/' ~ product.picture)}}" alt="photo du produit"></td>
 					<td>{{ product.uc }}</td>
+
 					<td>{{ product.price }} €</td>
-					<td> <a href="{{ path('user_backoffice_product_edit', {id: product.id}) }}">Editer</a></td>
-					<td> <a href="{{ path('user_backoffice_product_delete', {id: product.id}) }}">Supprimer</a></td>
+					<td>
+						<a href="{{ path('user_backoffice_product_edit', {id: product.id}) }}">Editer</a>
+					</td>
+					<td>
+						<a href="{{ path('user_backoffice_product_delete', {id: product.id}) }}">Supprimer</a>
+					</td>
+
 				</tr>
 			{% endfor %}
 		</tbody>
