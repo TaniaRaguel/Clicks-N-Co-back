@@ -47,7 +47,9 @@ security:
 
         - { path: ^/api/v1,       roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/v1/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/v1, roles: ROLE_USER, methods: ["PUT", "PATCH", "POST"]}
+        - { path: ^/user/backoffice, roles: ROLE_TRADER }
 
-        # - { path: ^/api/v1/products,       roles: ROLE_ADMIN }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+    role_hierarchy:
+        ROLE_TRADER: ROLE_USER
+            
