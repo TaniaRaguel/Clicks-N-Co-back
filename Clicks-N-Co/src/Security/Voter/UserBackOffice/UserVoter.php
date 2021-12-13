@@ -2,18 +2,19 @@
 
 namespace App\Security\Voter\UserBackOffice;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class UserVoter extends Voter
 {
 
-    public function __construct(TokenInterface $tokenInterface, JWTTokenManagerInterface $jwtManager)
+    public function __construct(TokenStorageInterface $tokenStorageInterface, JWTTokenManagerInterface $jwtManager)
 {
     $this->jwtManager = $jwtManager;
-    $this->tokenInterface = $tokenInterface;
+    $this->tokenStorageInterface = $tokenStorageInterface;
 }
     protected function supports(string $attribute, $subject): bool
     {
@@ -25,7 +26,7 @@ class UserVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        $decodedJwtToken = $this->jwtManager->decode($this->tokenInterface->getToken());
+        $decodedJwtToken = $this->jwtManager->decode($this->tokenStorageInterface->getToken());
         $user = $decodedJwtToken->getUser();
 
         
