@@ -1,10 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un produit à
-	{{shop.name}}
+
+{% block title %}
+  Ajouter un produit à
+  {{ shop.name }}
 {% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+  <div>
+    <a href="{{
+      path(
+        'user_backoffice_shop_read',
+        {
+          name_slug: shop.nameslug
+        }
+      )
+      }}">
+      <i class="bi bi-arrow-left-square-fill"></i>
+    </a>
+ </div>
+     <div class="form"><h2>
+      Ajouter un produit à
+      {{ shop.name }}
+    </h2>
+ 
+
 
 	<div>
 		<a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}">Retour</a>
@@ -23,5 +44,6 @@
 	{{ form_row(form.tags) }}
 	<button>Ajouter</button>
 	{{ form_end(form) }}
+
 
 {% endblock %}

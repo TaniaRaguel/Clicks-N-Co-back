@@ -1,8 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier {{product.name}} de {{product.shop}}{% endblock %}
+
+{% block title %}
+  Modifier {{ product.name }} de {{ product.shop }}
+{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+  <div>
+    <a href="{{
+      path(
+        'user_backoffice_shop_read',
+        {
+          name_slug: shop.nameslug
+        }
+      )
+      }}">
+     <i class="bi bi-arrow-left-square-fill"></i>
+    </a>
+ </div>
+     <div class="form"><h2>
+      Modifier {{ product.name }} de {{ product.shop }}
+    </h2>
+ 
 
 <div>
     <h2>Modifier {{product.name}} de {{product.shop}}</h2>

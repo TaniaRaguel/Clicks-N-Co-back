@@ -5,6 +5,7 @@ namespace App\Controller\UserBackOffice;
 use App\Entity\Product;
 use App\Entity\Shop;
 use App\Form\ProductType;
+use App\Service\ImageUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,7 @@ class ProductController extends AbstractController
   /**
    * @Route("/edit/{id}", name="edit")
    */
-  public function edit(Request $request, Product $product, EntityManagerInterface $manager): Response
+  public function edit(Request $request, Product $product, EntityManagerInterface $manager, ImageUploader $imageUploader): Response
   {
     // On précise qu'on associe $season à notre formulaire
     $form = $this->createForm(ProductType::class, $product);
@@ -49,25 +50,33 @@ class ProductController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
 
+      $imageUploader->uploadProductImage($form);
+
       $manager->persist($product);
       $manager->flush();
 
       return $this->redirectToRoute('user_backoffice_shop_read', [
         'name_slug' => $shop->getNameSlug(),
-      ]); 
+
+      ]);
+
     }
 
     return $this->render('user_back_office/product/edit.html.twig', [
       'form' => $form->createView(),
       'user' => $user,
       'product' => $product,
+      'shop' => $shop,
+
     ]);
   }
 
   /**
    * @Route("/{id}/add", name="add")
    */
-  public function add(Request $request, EntityManagerInterface $manager, Shop $shop): Response
+
+  public function add(Request $request, EntityManagerInterface $manager, Shop $shop, ImageUploader $imageUploader): Response
+
   {
 
     $product = new Product();
@@ -82,13 +91,17 @@ class ProductController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
 
+      $imageUploader->uploadProductImage($form);
+
       $product->setShop(($shop));
       $manager->persist($product);
       $manager->flush();
 
       return $this->redirectToRoute('user_backoffice_shop_read', [
         'name_slug' => $shop->getNameSlug(),
-      ]); 
+
+      ]);
+
     }
 
     return $this->render('user_back_office/product/add.html.twig', [

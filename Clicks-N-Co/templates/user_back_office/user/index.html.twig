@@ -4,54 +4,55 @@
 
 {% block body %}
 
+	<div class="box-container">
 
-	<div class="example-wrapper">
 
 
-		<label for="shop-select">votre magasin</label>
-		<a href="{{ path('user_backoffice_shop_add', {id: user.id}) }}">Ajouter</a>
+		
+
+
+		<section class="profil-card ">
+		<h2>Votre profil</h2> <br>
+	
+		
+
+			<ul>
+				<li>
+					{{user.firstname}} {{user.lastname}}</li> <br>
+			<h3>Contact:</h3>
+				<li>
+					{{user.email}}</li>
+
+
+				 <li>téléphone : {{user.phonenumber}}</li> <br>
+
+			</ul>
+			<h3>Adresse:</h3>
+			<ul>
+				<li>					
+					{{user.address}}</li>
+
+				 <li> {{user.zipcode}} {{user.city}}</li> 	
+
+			</ul>
+				</section>
+
+			<section class="shop-card" >
+			<h3 for="shop-select"> {% if shops|length > 1 %} Vos commerces {% else %} Votre commerce </h3> 
+			{% endif %}
+		<a href="{{ path('user_backoffice_shop_add', {id: user.id}) }}"><i class="bi bi-plus-circle-dotted"></i></a>  <br> <br>
+
 
 
 		{% for shop in shops %}
 			<ul>
-				<li><a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }} ">{{ shop.name }}{{ loop.last != true ? ',' }}</a><a href="{{ path('user_backoffice_shop_edit', {'name_slug': shop.nameslug}) }}">Editer</a></li>
-			
-				
+				<li><a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }} ">{{ shop.name }}</a>
+							
 			</ul>
-
 
 		{% endfor %}
-
-
-		<section class="profil">Votre profil</section>
+		</section>
 	
-		<div>
-			<ul>
-				<li>Nom :
-					{{user.lastname}}</li>
-				<li>Prénom :
-					{{user.firstname}}</li>
-
-				<li>email :
-					{{user.email}}</li>
-
-				 <li>téléphone : {{user.phonenumber}}</li> 
-			</ul>
-			<p>Votre adresse</p>
-			<ul>
-				<li>
-					rue:
-					{{user.address}}</li>
-				 <li> Code postal: {{user.zipcode}}</li> 
-				<li>
-					Ville:
-					{{user.city}}</li>
-
-			</ul>
-
-
-		</div>
-
 
 	</div>
 {% endblock %}
