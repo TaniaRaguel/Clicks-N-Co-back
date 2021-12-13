@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security\Voter;
+namespace App\Security\UserVoter\Voter;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -61,11 +61,7 @@ class UserVoter extends Voter
                 // return true or false
                 if($subject->getUser() === $user) {
                     return true;
-                }
-
-
-
-         
+                }         
         }
 
         return false;
