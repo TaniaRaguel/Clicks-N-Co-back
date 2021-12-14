@@ -44,8 +44,23 @@ class UserVoter extends Voter
             break;
 
 
+        break;
+      case 'EDIT':
+        // logic to determine if the user can EDIT
+        // return true or false
+        if ($subject->getUser() === $user) {
+          return true;
         }
 
-        return false;
+        break;
+      case 'ADD':
+        // logic to determine if the user can EDIT
+        // return true or false
+        if ($subject->getUser() === $user) {
+          return true;
+        }
     }
+
+    return false;
+  }
 }
