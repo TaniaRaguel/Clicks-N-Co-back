@@ -31,7 +31,7 @@ class UserVoter extends Voter
       case 'ADD':
         // logic to determine if the user can READ
         // return true or false
-        if ($subject->getUser() === $user) {
+        if ($subject === $user) {
           return true;
         }
         break;

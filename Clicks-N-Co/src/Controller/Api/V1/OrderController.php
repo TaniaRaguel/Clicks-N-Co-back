@@ -5,6 +5,7 @@ namespace App\Controller\Api\V1;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,8 @@ class OrderController extends AbstractController
    */
   public function read(Order $order): Response
   {
-    $this->denyAccessUnlessGranted('READ', $order);
+    $user= $order->getUser();
+    $this->denyAccessUnlessGranted('READ', $user);
 
     return $this->json($order, 200, [], [
       'groups' => ['order_read'],
@@ -41,11 +43,9 @@ class OrderController extends AbstractController
   /**
    * @Route("", name="add", methods={"POST"})
    */
-  public function add(EntityManagerInterface $manager, Request $request): Response
+  public function add(EntityManagerInterface $manager, Request $request, Mailer $mailer): Response
   {
     $order = new Order;
-
-    $this->denyAccessUnlessGranted('ADD', $order);
 
     $form = $this->createForm(OrderType::class, $order, ['csrf_protection' => false]);
 
@@ -56,6 +56,8 @@ class OrderController extends AbstractController
     if ($form->isValid()) {
       $manager->persist($order);
       $manager->flush();
+
+      $mailer->sendEmailNewOrder($order);
 
       return $this->json($order, 201, [], [
         'groups' => ['order_read'],
@@ -112,7 +114,7 @@ class OrderController extends AbstractController
    */
   public function delete(EntityManagerInterface $manager, Order $order, Request $request)
   {
-    $this->denyAccessUnlessGranted('DELETE', $order);
+    /* $this->denyAccessUnlessGranted('DELETE', $order); */
     $manager->remove($order);
     $manager->flush();
 
