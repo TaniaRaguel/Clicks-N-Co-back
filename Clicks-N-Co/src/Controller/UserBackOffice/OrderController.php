@@ -19,10 +19,11 @@ class OrderController extends AbstractController
    */
   public function read(Shop $shop)
   {
-
     $orders = $shop->getOrders();
 
     $user = $shop->getUser();
+    $this->denyAccessUnlessGranted('READ', $user);
+
 
     return $this->render('user_back_office/order/read.html.twig', [
       'orders' => $orders,
