@@ -4,6 +4,7 @@ namespace App\Controller\UserBackOffice;
 
 use App\Entity\Order;
 use App\Entity\Shop;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +37,7 @@ class OrderController extends AbstractController
   /**
    * @Route("/updateStatus/{id}", name="updateStatus")
    */
-  public function prepareOrder(EntityManagerInterface $manager, Order $order)
+  public function prepareOrder(EntityManagerInterface $manager, Order $order, Mailer $mailer)
   {
     $shop = $order->getShop();
     $shopId = $shop->getId();
@@ -51,6 +52,7 @@ class OrderController extends AbstractController
     } elseif ($order->getStatus() == 1) {
       $order->setStatus(2);
       $order->setUpdatedAt(new \DateTimeImmutable());
+      $mailer->sendReadyOrder($order);
       $manager->flush();
     } elseif ($order->getStatus() == 2) {
       $order->setStatus(3);
