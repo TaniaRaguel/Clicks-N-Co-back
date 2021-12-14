@@ -23,10 +23,11 @@ class ProductController extends AbstractController
    */
   public function read(Product $product)
   {
-
+    
     $shop = $product->getShop();
 
     $user = $shop->getUser();
+    $this->denyAccessUnlessGranted('READ', $user);
 
     return $this->render('user_back_office/product/read.html.twig', [
       'product' => $product,
@@ -39,14 +40,16 @@ class ProductController extends AbstractController
    */
   public function edit(Request $request, Product $product, EntityManagerInterface $manager, ImageUploader $imageUploader): Response
   {
+
+    $shop = $product->getShop();
+    $user = $shop->getUser();
+    $this->denyAccessUnlessGranted('EDIT', $user);
     // On précise qu'on associe $season à notre formulaire
     $form = $this->createForm(ProductType::class, $product);
 
     $form->handleRequest($request);
 
-    $shop = $product->getShop();
 
-    $user = $shop->getUser();
 
     if ($form->isSubmitted() && $form->isValid()) {
 
@@ -79,11 +82,13 @@ class ProductController extends AbstractController
 
   {
 
+    
     $product = new Product();
-
+    $user = $shop->getUser();
+    $this->denyAccessUnlessGranted('ADD', $user);
+    
     $product->getShop();
 
-    $user = $shop->getUser();
 
     $form = $this->createForm(ProductType::class, $product);
 
@@ -115,8 +120,12 @@ class ProductController extends AbstractController
    * @Route("/delete/{id}", name="delete")
    */
   public function delete(EntityManagerInterface $manager, Product $product)
-  {
+  { 
+
     $shop = $product->getShop();
+    $user = $shop->getUser();
+     $this->denyAccessUnlessGranted('DELETE', $user);
+
 
     $manager->remove($product);
     $manager->flush();
