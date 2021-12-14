@@ -26,6 +26,9 @@ class ShopController extends AbstractController
      */
     public function read(Shop $shop): Response
     {   
+        $user = $shop->getUser();
+        
+        $this->denyAccessUnlessGranted('READ', $user);
 
         $orders = $shop->getOrders();
         $ordersToPrepare = [];
@@ -37,7 +40,7 @@ class ShopController extends AbstractController
 
         return $this->render('user_back_office/shop/read.html.twig', [
             'shop' => $shop,
-            'user' => $shop->getUser(),
+            'user' => $user,
             'products' => $shop->getProducts(),
             'orders' => $ordersToPrepare,
         ]);
@@ -52,7 +55,13 @@ class ShopController extends AbstractController
      */
     public function edit(EntityManagerInterface $manager, Request $request, Shop $shop, Slugger $slugger, ImageUploader $imageUploader)
     {
+
+        
         $user = $shop->getUser();
+
+        $this->denyAccessUnlessGranted('EDIT', $user);
+
+        
        
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
@@ -89,6 +98,9 @@ class ShopController extends AbstractController
 
     {
         $shop = new Shop;
+
+        $this->denyAccessUnlessGranted('ADD', $user);
+
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
 

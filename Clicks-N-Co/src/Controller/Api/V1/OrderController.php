@@ -31,7 +31,8 @@ class OrderController extends AbstractController
    */
   public function read(Order $order): Response
   {
-    $this->denyAccessUnlessGranted('READ', $order);
+    $user= $order->getUser();
+    $this->denyAccessUnlessGranted('READ', $user);
 
     return $this->json($order, 200, [], [
       'groups' => ['order_read'],
@@ -44,8 +45,7 @@ class OrderController extends AbstractController
   public function add(EntityManagerInterface $manager, Request $request): Response
   {
     $order = new Order;
-
-    $this->denyAccessUnlessGranted('ADD', $order);
+   
 
     $form = $this->createForm(OrderType::class, $order, ['csrf_protection' => false]);
 
@@ -112,7 +112,7 @@ class OrderController extends AbstractController
    */
   public function delete(EntityManagerInterface $manager, Order $order, Request $request)
   {
-    $this->denyAccessUnlessGranted('DELETE', $order);
+    /* $this->denyAccessUnlessGranted('DELETE', $order); */
     $manager->remove($order);
     $manager->flush();
 
