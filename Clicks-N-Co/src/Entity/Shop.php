@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Shop
 {
     /**
-     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop","shop_read" , "shop_search","shop_browse"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop","shop_read", "shop_search", "shop_browse"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -24,7 +24,7 @@ class Shop
     private $id;
 
     /**
-     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop", "shop_read", "shop_search","shop_browse"})
+     * @Groups({"user_read", "product_read", "order_browse", "order_read", "shop_homeShop", "shop_read", "shop_search", "shop_browse"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -130,7 +130,6 @@ class Shop
         $this->categories = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
-
     }
 
     public function __toString()
@@ -265,7 +264,7 @@ class Shop
 
     /**
      * Get the value of name_slug
-     */ 
+     */
     public function getNameSlug(): ?string
     {
         return $this->name_slug;
@@ -275,7 +274,7 @@ class Shop
      * Set the value of name_slug
      *
      * @return  self
-     */ 
+     */
     public function setNameSlug(string $name_slug): self
     {
         $this->name_slug = $name_slug;
@@ -402,6 +401,4 @@ class Shop
 
         return $this;
     }
-
-    
 }

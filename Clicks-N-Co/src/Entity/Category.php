@@ -15,22 +15,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Category
 {
     /**
-     * @Groups({"category_browse", "category_read", "category_home", "shop_search"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"category_browse", "category_read", "category_home", "shop_search"})
      */
     private $id;
 
     /**
-    * @Groups({"category_browse", "category_read","category_home", "shop_read", "shop_search"})
-     *  @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"category_browse", "category_read","category_home", "shop_read", "shop_search"})
      */
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"category_browse", "category_read", "category_home","shop_read"})
-     *  @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
