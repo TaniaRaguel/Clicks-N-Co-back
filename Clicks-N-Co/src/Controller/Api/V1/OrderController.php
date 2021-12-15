@@ -57,7 +57,8 @@ class OrderController extends AbstractController
       $manager->persist($order);
       $manager->flush();
 
-      $mailer->sendEmailNewOrder($order);
+      $mailer->sendEmailNewOrderTrader($order);
+      $mailer->sendEmailNewOrderCustomer($order);
 
       return $this->json($order, 201, [], [
         'groups' => ['order_read'],
