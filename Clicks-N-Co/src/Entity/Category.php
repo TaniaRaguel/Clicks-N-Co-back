@@ -23,7 +23,7 @@ class Category
     private $id;
 
     /**
-    * @Groups({"category_browse", "category_read","category_home", "shop_read"})
+    * @Groups({"category_browse", "category_read","category_home", "shop_read", "shop_search"})
      *  @ORM\Column(type="string", length=255)
      */
     private $name;

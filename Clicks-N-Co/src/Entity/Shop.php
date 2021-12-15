@@ -108,7 +108,7 @@ class Shop
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="shops")
-     * @Groups({"shop_read"})
+     * @Groups({"shop_read", "shop_search"})
      */
     private $categories;
 
