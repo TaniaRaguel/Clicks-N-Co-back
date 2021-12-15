@@ -148,23 +148,13 @@ display: flex;
 }
 }
 
-
-   
-
-    
-    
-    
-
-
-    
-
-
 .header__title{
 color:white
 }
 
-.command-alert {
-    color: red;
+#command-alert {
+    color:red;
+    text-decoration: underline;
 }
 
 .orders__in_preparation {
@@ -183,4 +173,46 @@ color:white
     background-color: lightcoral;
 }
 
+.name__profil {
+    display: flex;
+}
+
+.user-avatar {
+    margin-left: 1rem;
+    width: 75px;
+}
+
+.button {
+    background-color: #de4e4e;
+    color: white;
+}
+
+.order-button {
+    background-color: white;
+    color: black;
+}
+
+.order {
+    border : 0.5px solid rgb(230, 224, 224);
+    width: 100%;
+    margin: 5rem 0rem 5rem 0rem;
+    padding:2rem 5rem 3rem 2rem;
+    border-radius: 1rem;
+    background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-title {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.products, .orderlines-table {
+    border : 0.5px solid rgb(230, 224, 224);
+    margin: 5rem 0rem 5rem 0rem;
+    padding:2rem 5rem 3rem 2rem;
+    border-radius: 1rem;
+    background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+}
 

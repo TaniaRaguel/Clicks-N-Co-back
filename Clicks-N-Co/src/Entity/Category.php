@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Category
 {
     /**
-     * @Groups({"category_browse", "category_read", "category_home"})
+     * @Groups({"category_browse", "category_read", "category_home", "shop_search"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,7 +23,7 @@ class Category
     private $id;
 
     /**
-    * @Groups({"category_browse", "category_read","category_home", "shop_read"})
+    * @Groups({"category_browse", "category_read","category_home", "shop_read", "shop_search"})
      *  @ORM\Column(type="string", length=255)
      */
     private $name;

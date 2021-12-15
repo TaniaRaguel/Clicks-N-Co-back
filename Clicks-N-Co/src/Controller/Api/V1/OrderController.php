@@ -97,6 +97,10 @@ class OrderController extends AbstractController
       $manager->flush();
 
 
+      $mailer->sendEmailNewOrderTrader($order);
+      $mailer->sendEmailNewOrderCustomer($order);
+
+
     foreach ($orderlines as $orderline => $value) {
       $productId = $orderlines[$orderline]["product_id"];
       $product = $productRepository->find($productId);

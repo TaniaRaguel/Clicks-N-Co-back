@@ -18,7 +18,7 @@ class OrderController extends AbstractController
   /**
    * @Route("/{id}", name="read", methods={"GET"})
    */
-  public function read(Shop $shop)
+  public function read(Shop $shop, Order $order)
   {
     $orders = $shop->getOrders();
 
@@ -88,5 +88,4 @@ class OrderController extends AbstractController
       'shop' => $shop,
     ]);
   }
-
 }
