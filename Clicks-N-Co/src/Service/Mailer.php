@@ -83,7 +83,7 @@ class Mailer
       ->cc($userEmail)
       ->subject('Votre commande est prête !')
       // ->text('Votre commande est prête ! Vous pouvez la retirer !')
-      ->html('<h1>Votre commande <strong>REF' . $orderId . '</strong> est disponible !</h1><br><h2>Bonjour <strong>' . $firstName . ' ' . $lastname . '</strong>,</h2><br><p>Votre commande <strong>REF' . $orderId . '</strong> est disponible chez <strong>' . $shopName . '</strong>.</p><br><p>Vous pouvez la retirer.</p><br><h2>Horaires d\'ouvertures et adresse de ' . $shopName . '</h2><br><p><strong>' . $shopName . '</strong></p><p><strong>' . $shopAdress . '</strong></p><p><strong>' . $shopZipCode . ' ' . $shopCity . '</strong></p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</strong></p>');
+      ->html('<h1>Votre commande <strong>REF' . $orderId . '</strong> est disponible !</h1><br><h2>Bonjour <strong>' . $firstName . ' ' . $lastname . '</strong>,</h2><br><p>Votre commande <strong>REF' . $orderId . '</strong> est disponible chez <strong>' . $shopName . '</strong>.</p><br><p>Vous pouvez la retirer.</p><br><h2>Horaires d\'ouvertures et adresse de ' . $shopName . '</h2><br><p><strong>' . $shopOpeningHours . '</strong></p><p><strong>' . $shopName . '</strong></p><p><strong>' . $shopAdress . '</strong></p><p><strong>' . $shopZipCode . ' ' . $shopCity . '</strong></p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</strong></p>');
 
     $this->mailer->send($email);
   }
