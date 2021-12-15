@@ -129,14 +129,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JsonSer
     public function jsonSerialize()
     {
         return [
-        'firstname' => $this->getFirstname(),
-        'lastname' => $this->getLastname(),
-        'email' => $this->getUserIdentifier(),
-        'phone_number' => $this->getPhoneNumber(),
-        'address' => $this->getAddress(),
-        'zip_code' => $this->getZipCode(),
-        'city' => $this->getCity(),
-        'roles' => $this->getRoles(),
+            'id' => $this->getId(),
+            'firstname' => $this->getFirstname(),
+            'lastname' => $this->getLastname(),
+            'email' => $this->getUserIdentifier(),
+            'phone_number' => $this->getPhoneNumber(),
+            'address' => $this->getAddress(),
+            'zip_code' => $this->getZipCode(),
+            'city' => $this->getCity(),
+            'avatar' => $this->getAvatar(),
+            'roles' => $this->getRoles(),
         ];
     }
 
@@ -314,7 +316,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JsonSer
     public function setCitySlug(string $city_slug): self
     {
         $this->city_slug = $city_slug;
-        
+
 
         return $this;
     }
