@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}"><i class="bi bi-arrow-left-square-fill"></i></a>
+	<a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}">
+		<i class="bi bi-arrow-left-square-fill"></i>
+	</a>
 	<h1>Commandes de
 		{{ shop.name }}</h1>
 	<h3>A Préparer</h3>
@@ -33,25 +35,25 @@
 						<td>A préparer</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_updateStatus', {id: order.id}) }}">
-								<button>Préparer</button>
+								<button class="order-button">Préparer</button>
 							</form>
 						</td>
 						<th scope="col">
 							<p>
-								<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
+								<a data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
 									<i class="bi bi-caret-down-fill"></i>
 								</a>
 							</p>
 						</th>
 					</tr>
-					<tr class="collapse" id="collapseExample">
+					<tr class="collapse orderlines-table" id="collapseExample">
 						<th scope="col">Réf Ligne</th>
 						<th scope="col">Produit</th>
 						<th scope="col">Quantité</th>
 						<th scope="col">Prix</th>
 					</tr>
 					{% for orderline in order.orderlines %}
-						<tr class="collapse" id="collapseExample{# {{orderline.orderRef}} #}">
+						<tr class="collapse  orderlines-table" id="collapseExample">
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
@@ -87,25 +89,25 @@
 						<td>En cours</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_updateStatus', {id: order.id}) }}">
-								<button>Finaliser</button>
+								<button class="order-button">Finaliser</button>
 							</form>
 						</td>
 						<th scope="col">
 							<p>
-								<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
+								<a data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
 									<i class="bi bi-caret-down-fill"></i>
 								</a>
 							</p>
 						</th>
 					</tr>
-					<tr class="collapse" id="collapseExample">
+					<tr class="collapse orderlines-table" id="collapseExample">
 						<th scope="col">Réf Ligne</th>
 						<th scope="col">Produit</th>
 						<th scope="col">Quantité</th>
 						<th scope="col">Prix</th>
 					</tr>
 					{% for orderline in order.orderlines %}
-						<tr class="collapse" id="collapseExample{# {{orderline.orderRef}} #}">
+						<tr class="collapse  orderlines-table" id="collapseExample{# {{orderline.orderRef}} #}">
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
@@ -141,25 +143,25 @@
 						<td>Préparée</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_updateStatus', {id: order.id}) }}">
-								<button>Archiver</button>
+								<button class="order-button">Archiver</button>
 							</form>
 						</td>
 						<th scope="col">
 							<p>
-								<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
+								<a data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
 									<i class="bi bi-caret-down-fill"></i>
 								</a>
 							</p>
 						</th>
 					</tr>
-					<tr class="collapse" id="collapseExample">
+					<tr class="collapse orderlines-table" id="collapseExample">
 						<th scope="col">Réf Ligne</th>
 						<th scope="col">Produit</th>
 						<th scope="col">Quantité</th>
 						<th scope="col">Prix</th>
 					</tr>
 					{% for orderline in order.orderlines %}
-						<tr class="collapse" id="collapseExample{# {{orderline.orderRef}} #}">
+						<tr class="collapse  orderlines-table" id="collapseExample{# {{orderline.orderRef}} #}">
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
@@ -195,25 +197,25 @@
 						<td>Archivée</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_delete', {id: order.id}) }}">
-								<button>Supprimer</button>
+								<button class="order-button">Supprimer</button>
 							</form>
 						</td>
 						<th scope="col">
 							<p>
-								<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
+								<a data-bs-toggle="collapse" href="#collapseExample{# {{order.id}} #}" role="button" aria-expanded="false" aria-controls="collapseExample">
 									<i class="bi bi-caret-down-fill"></i>
 								</a>
 							</p>
 						</th>
 					</tr>
-					<tr class="collapse" id="collapseExample">
+					<tr class="collapse orderlines-table" id="collapseExample">
 						<th scope="col">Réf Ligne</th>
 						<th scope="col">Produit</th>
 						<th scope="col">Quantité</th>
 						<th scope="col">Prix</th>
 					</tr>
 					{% for orderline in order.orderlines %}
-						<tr class="collapse" id="collapseExample{# {{orderline.orderRef}} #}">
+						<tr class="collapse  orderlines-table" id="collapseExample{# {{orderline.orderRef}} #}">
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
