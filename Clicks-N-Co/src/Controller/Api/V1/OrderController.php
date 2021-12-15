@@ -3,8 +3,12 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\Order;
+use App\Entity\Orderline;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
+use App\Repository\ProductRepository;
+use App\Repository\ShopRepository;
+use App\Repository\UserRepository;
 use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +36,7 @@ class OrderController extends AbstractController
    */
   public function read(Order $order): Response
   {
-    $user= $order->getUser();
+    $user = $order->getUser();
     $this->denyAccessUnlessGranted('READ', $user);
 
     return $this->json($order, 200, [], [
@@ -43,36 +47,97 @@ class OrderController extends AbstractController
   /**
    * @Route("", name="add", methods={"POST"})
    */
-  public function add(EntityManagerInterface $manager, Request $request, Mailer $mailer): Response
+  public function add(EntityManagerInterface $manager, Request $request, Mailer $mailer,  UserRepository $userRepository, ShopRepository $shopRepository, ProductRepository $productRepository): Response
   {
     $order = new Order;
 
-    $form = $this->createForm(OrderType::class, $order, ['csrf_protection' => false]);
-
     $jsonArray = json_decode($request->getContent(), true);
 
-    $form->submit($jsonArray);
+    $userId= $jsonArray["user"];
+    $user = $userRepository->find($userId);
+   
+    
+    
+    $orderlines = $jsonArray["orderlines"];
+    
+    //________________________________
+    // Recalcul du prix total pour vérification
+    $verifiedTotal = 0;
+    $productIdList = [];
 
-    if ($form->isValid()) {
+    foreach ($orderlines as $orderline => $value) {
+      $productId = $orderlines[$orderline]["product_id"];
+      $quantity = $orderlines[$orderline]["quantity"];
+      $price = $orderlines[$orderline]["price"];
+    
+
+      $lineTotal = $quantity *$price;
+      $verifiedTotal = $verifiedTotal + $lineTotal;
+      $productIdList[] = $productId;
+    }
+    //________________________________________
+
+    $product = $productRepository->find($productIdList[0]);
+    $shop = $product->getshop();
+    
+
+    $order->setTotalPrice($verifiedTotal);
+
+
+   /*  $form = $this->createForm(OrderType::class, $order, ['csrf_protection' => false],);
+    $form->submit($order); */
+ 
+    /* if ($form->isValid()) { */
+
+      $order->setUser($user);
+      $order->setShop($shop);
+      $order->setStatus(0);
+     
       $manager->persist($order);
       $manager->flush();
 
-      $mailer->sendEmailNewOrder($order);
 
-      return $this->json($order, 201, [], [
-        'groups' => ['order_read'],
-      ]);
+    foreach ($orderlines as $orderline => $value) {
+      $productId = $orderlines[$orderline]["product_id"];
+      $product = $productRepository->find($productId);
+      $quantity = $orderlines[$orderline]["quantity"];
+      $price = $orderlines[$orderline]["price"];
+      $lineTotal = $quantity *$price;
+
+      $orderline = new Orderline;
+     $orderline->setOrderRef($order);
+
+     $orderline->setQuantity($quantity);
+     $orderline->setPrice($lineTotal);
+    
+     $orderline->setProduct($product);    
+
+     $manager->persist($orderline);
+     $manager->flush();
     }
+    //_
 
-    $errorMessages = [];
+      return $this->json($shop, 201, [],[
+          'groups' => ['shop_add']
+
+        ]
+      );
+   /*  } */
+   
+    /* $errorMessages = [];
     foreach ($form->getErrors(true) as $error) {
       $errorMessages[] = [
         'property' => $error->getOrigin()->getName(),
         'message' => $error->getMessage(),
-      ];
-    }
-    return $this->json($errorMessages, 400);
-  }
+      ]; 
+  } */
+  /*  return $this->json($errorMessages, 400); */
+  } 
+
+
+
+
+
 
   /**
    * 
