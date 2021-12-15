@@ -26,8 +26,6 @@ class UserController extends AbstractController
   {
     $user = new User;
 
-    $this->denyAccessUnlessGranted('ADD', $user);
-
     $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
 
     $jsonArray = json_decode($request->getContent(), true);

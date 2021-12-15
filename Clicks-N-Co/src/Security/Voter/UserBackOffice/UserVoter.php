@@ -11,54 +11,36 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class UserVoter extends Voter
 {
 
- 
-    protected function supports(string $attribute, $subject): bool
-    {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['READ', 'EDIT', 'ADD'])
 
-            && $subject instanceof \App\Entity\User; 
+  protected function supports(string $attribute, $subject): bool
+  {
+    // replace with your own logic
+    // https://symfony.com/doc/current/security/voters.html
+    return in_array($attribute, ['READ', 'EDIT'])
+
+      && $subject instanceof \App\Entity\User;
+  }
+
+  protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+  {
+
+
+    $user = $token->getUser();
+
+    // if the user is anonymous, do not grant access
+    if (!$user instanceof UserInterface) {
+      return false;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
-    {
-
-
-        $user = $token->getUser();
-
-        // if the user is anonymous, do not grant access
-        if (!$user instanceof UserInterface) {
-          return false;
-        }
-    
-        switch ($attribute) {
-          case 'READ':
-          case 'EDIT':
-          case 'ADD':
-            // logic to determine if the user can READ
-            // return true or false
-            if ($subject === $user) {
-              return true;
-            }
-            break;
-
-
-        break;
+    switch ($attribute) {
+      case 'READ':
       case 'EDIT':
-        // logic to determine if the user can EDIT
+        // logic to determine if the user can READ
         // return true or false
-        if ($subject->getUser() === $user) {
+        if ($subject === $user) {
           return true;
         }
-
         break;
-      case 'ADD':
-        // logic to determine if the user can EDIT
-        // return true or false
-        if ($subject->getUser() === $user) {
-          return true;
-        }
     }
 
     return false;
