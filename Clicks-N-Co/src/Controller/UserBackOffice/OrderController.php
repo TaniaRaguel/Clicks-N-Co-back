@@ -18,7 +18,7 @@ class OrderController extends AbstractController
   /**
    * @Route("/{id}", name="read", methods={"GET"})
    */
-  public function read(Shop $shop, Order $order)
+  public function read(Shop $shop)
   {
     $orders = $shop->getOrders();
 
