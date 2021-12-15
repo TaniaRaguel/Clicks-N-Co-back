@@ -27,8 +27,8 @@
 					<tr class="new__orders">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
-						<td>{{ user.firstname }}
-							{{ user.lastname }}</td>
+						<td>{{ order.user.firstname }}
+							{{ order.user.lastname }}</td>
 						<td>{{ order.totalprice }}</td>
 						<td>A préparer</td>
 						<td>
@@ -81,8 +81,8 @@
 					<tr class="orders__in_preparation">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
-						<td>{{ user.firstname }}
-							{{ user.lastname }}</td>
+						<td>{{ order.user.firstname }}
+							{{ order.user.lastname }}</td>
 						<td>{{ order.totalprice }}</td>
 						<td>En cours</td>
 						<td>
@@ -135,8 +135,8 @@
 					<tr class="prepared__orders">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
-						<td>{{ user.firstname }}
-							{{ user.lastname }}</td>
+						<td>{{ order.user.firstname }}
+							{{ order.user.lastname }}</td>
 						<td>{{ order.totalprice }}</td>
 						<td>Préparée</td>
 						<td>
@@ -189,8 +189,8 @@
 					<tr class="archived__orders">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
-						<td>{{ user.firstname }}
-							{{ user.lastname }}</td>
+						<td>{{ order.user.firstname }}
+							{{ order.user.lastname }}</td>
 						<td>{{ order.totalprice }}</td>
 						<td>Archivée</td>
 						<td>
