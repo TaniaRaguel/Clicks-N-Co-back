@@ -53,7 +53,7 @@ class OrderController extends AbstractController
 
     $jsonArray = json_decode($request->getContent(), true);
 
-    $userId= $jsonArray["user"]["user"]["id"];
+    $userId= $jsonArray["userCart"]["user"]["user"]["id"];
     $user = $userRepository->find($userId);
    
     
