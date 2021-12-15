@@ -21,14 +21,14 @@ class ShopRepository extends ServiceEntityRepository
     }
 
 
-/**
- * return the 5 random shops on the homepage
- *
- * @return Shop[] Returns an array of Shop objects
- */
-    public function FindHomeShop ()
+    /**
+     * return the 5 random shops on the homepage
+     *
+     * @return Shop[] Returns an array of Shop objects
+     */
+    public function FindHomeShop()
     {
-               
+
         $manager = $this->getEntityManager();
         $query = $manager->createQuery(
             'SELECT shop
@@ -36,11 +36,9 @@ class ShopRepository extends ServiceEntityRepository
             ORDER BY RAND()
             '
         )
-        ->setMaxResults(5);
-   
-    return $query->getResult();
-              
-        
+            ->setMaxResults(5);
+
+        return $query->getResult();
     }
 
     /**
@@ -57,11 +55,12 @@ class ShopRepository extends ServiceEntityRepository
 
         // Etape 2 : On prépare la Requete SQL
         $query = $manager->createQuery(
-            'SELECT shop
-             FROM App\Entity\shop shop
-             WHERE shop.city LIKE :searchTerm
-             
-
+            'SELECT shop, category
+            FROM App\Entity\shop shop
+            JOIN shop.categories category
+            WHERE category.name LIKE :searchTerm
+            OR shop.city LIKE :searchTerm
+            OR shop.name LIKE :searchTerm
             '
         )
             // On prépare le paramètre (nettoyage de sécurité)
