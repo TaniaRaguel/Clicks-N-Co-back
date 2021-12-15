@@ -58,17 +58,17 @@ class OrderController extends AbstractController
    
     
     
-    $orderlines = $jsonArray["orderlines"];
-    
+    $orderlines = $jsonArray["cart"];
+    // dd($orderlines);
     //________________________________
     // Recalcul du prix total pour vérification
     $verifiedTotal = 0;
     $productIdList = [];
 
-    foreach ($orderlines as $orderline => $value) {
-      $productId = $orderlines[$orderline]["product_id"];
-      $quantity = $orderlines[$orderline]["quantity"];
-      $price = $orderlines[$orderline]["price"];
+    foreach ($orderlines as $orderline) {
+      $productId = $orderline["id"];
+      $quantity = $orderline["quantity"];
+      $price = $orderline["price"];
     
 
       $lineTotal = $quantity *$price;
@@ -101,11 +101,11 @@ class OrderController extends AbstractController
       $mailer->sendEmailNewOrderCustomer($order);
 
 
-    foreach ($orderlines as $orderline => $value) {
-      $productId = $orderlines[$orderline]["product_id"];
+    foreach ($orderlines as $orderline) {
+      $productId = $orderline["id"];
       $product = $productRepository->find($productId);
-      $quantity = $orderlines[$orderline]["quantity"];
-      $price = $orderlines[$orderline]["price"];
+      $quantity = $orderline["quantity"];
+      $price = $orderline["price"];
       $lineTotal = $quantity *$price;
 
       $orderline = new Orderline;
