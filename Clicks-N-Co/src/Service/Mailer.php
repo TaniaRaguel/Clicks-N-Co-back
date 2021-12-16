@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Order;
+use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -13,6 +14,25 @@ class Mailer
   public function __construct(MailerInterface $mailer)
   {
     $this->mailer = $mailer;
+  }
+
+  public function sendEmailNewUser(User $user)
+  {
+    
+    $firstName = $user->getFirstname();
+    $lastname = $user->getLastname();
+    $userEmail = $user->getEmail();
+
+
+    $email = (new Email())
+      ->from('clicksnco@gmail.com')
+      ->to('clicksnco-d601f7@inbox.mailtrap.io')
+      ->cc($userEmail)
+      ->subject('Bienvenue sur Clicks N Co')
+      // ->text('Allez voir dans votre espace magasin ! Une nouvelle commande est arrivée !')
+      ->html('<h1>Bienvenue sur Clicks N Co, <strong>' . $firstName . ' ' . $lastname . '</strong> !</h1><br><p>Félicitations pour la création de votre compte !</p><br><p>Vous pouvez, dès à présent, passer une commande !</p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</p></strong>');
+
+    $this->mailer->send($email);
   }
   public function sendEmailNewOrderTrader(Order $order)
   {
