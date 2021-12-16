@@ -9,9 +9,11 @@
 	<a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}">
 		<i class="bi bi-arrow-left-square-fill"></i>
 	</a>
-	<h1>Commandes de
-		{{ shop.name }}</h1>
-	<h3>A Préparer</h3>
+	<h2>{{ shop.name|capitalize }}</h2>
+	<h2>Vos commandes</h2>
+
+		{% if ordersToPrepare|length > 0 %}
+	<h3>A Préparer</h3> <br>
 	<table class="table table-hover">
     <thead>
         <tr>
@@ -23,15 +25,15 @@
           <th scope="col"></th>
         </tr>
 		</thead>
-		{% for order in orders %}
-			{% if order.status == 0 %}
+			
+		{% for order in ordersToPrepare %}
 				<tbody>
 					<tr class="new__orders">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
 						<td>{{ order.user.firstname }}
 							{{ order.user.lastname }}</td>
-						<td>{{ order.totalprice }}</td>
+						<td>{{ order.totalprice }}€</td>
 						<td>A préparer</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_updateStatus', {id: order.id}) }}">
@@ -57,15 +59,15 @@
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
-							<td>{{ orderline.price }}</td>
+							<td>{{ orderline.price }}€</td>
 						</tr>
 					{% endfor %}
-				{% endif %}
-			{% endfor %}
+				{% endfor %}
+			{% endif %}
 		</tbody>
 	</table>
-
-	<h3>En cours de  Préparation</h3>
+	{% if ordersPreparing|length > 0  %}
+	<h3>En cours de  Préparation</h3> <br>
 	<table class="table table-hover">
   	<thead>
 					<tr>
@@ -77,15 +79,15 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-		{% for order in orders %}
-			{% if order.status == 1 %}
+		{% for order in ordersPreparing %}
+			
 				<tbody>
 					<tr class="orders__in_preparation">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
 						<td>{{ order.user.firstname }}
 							{{ order.user.lastname }}</td>
-						<td>{{ order.totalprice }}</td>
+						<td>{{ order.totalprice }}€</td>
 						<td>En cours</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_updateStatus', {id: order.id}) }}">
@@ -111,15 +113,17 @@
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
-							<td>{{ orderline.price }}</td>
+							<td>{{ orderline.price }}€</td>
 						</tr>
 					{% endfor %}
-				{% endif %}
+				
 			{% endfor %}
+		{% endif %}
 		</tbody>
 	</table>
 
-	<h3>Préparées</h3>
+{% if ordersPrepared|length > 0 %}
+	<h3>Préparées</h3> <br>
 	<table class="table table-hover">
    <thead>
 					<tr>
@@ -131,15 +135,15 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-		{% for order in orders %}
-			{% if order.status == 2 %}
+		{% for order in ordersPrepared %}
+			
 				<tbody>
 					<tr class="prepared__orders">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
 						<td>{{ order.user.firstname }}
 							{{ order.user.lastname }}</td>
-						<td>{{ order.totalprice }}</td>
+						<td>{{ order.totalprice }}€</td>
 						<td>Préparée</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_updateStatus', {id: order.id}) }}">
@@ -165,15 +169,16 @@
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
-							<td>{{ orderline.price }}</td>
+							<td>{{ orderline.price }}€</td>
 						</tr>
 					{% endfor %}
-				{% endif %}
+				
 			{% endfor %}
+			{% endif %}
 		</tbody>
 	</table>
-
-	<h3>Archivées</h3>
+{% if ordersArchived|length > 0 %}
+	<h3>Archivées</h3> <br>
 	<table class="table table-hover">
   	<thead>
 					<tr>
@@ -185,15 +190,15 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-		{% for order in orders %}
-			{% if order.status == 3 %}
+		{% for order in ordersArchived%}
+			
 				<tbody>
 					<tr class="archived__orders">
 						<td>{{ order.id }}</td>
 						<td>{{ order.createdAt|date('d-m-Y') }}</td>
 						<td>{{ order.user.firstname }}
 							{{ order.user.lastname }}</td>
-						<td>{{ order.totalprice }}</td>
+						<td>{{ order.totalprice }}€</td>
 						<td>Archivée</td>
 						<td>
 							<form action="{{ path('user_backoffice_order_delete', {id: order.id}) }}">
@@ -219,11 +224,12 @@
 							<td>{{ orderline.id }}</td>
 							<td>{{ orderline.product.name }}</td>
 							<td>{{ orderline.quantity }}</td>
-							<td>{{ orderline.price }}</td>
+							<td>{{ orderline.price }}€</td>
 						</tr>
 					{% endfor %}
-				{% endif %}
+				
 			{% endfor %}
+			{% endif %}
 		</tbody>
 	</table>
 {% endblock %}

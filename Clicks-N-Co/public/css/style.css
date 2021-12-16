@@ -27,6 +27,7 @@ padding-bottom: 1rem !important;
 
 .footer .has-background-color {
 background-color: darkgray;
+
     }
 
 .menu{
@@ -67,13 +68,26 @@ font-size: 2.5rem;
 
 h2{
     font-size: 1.8rem;
+    padding: 1.5rem 0;
+    font-weight: bold;
     
 }
 
 h3{
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
+h4{
+    font-size: 1rem;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+}
+.list-shops{
+    font-size: 1rem;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+}
+
 
 
 .box-container{
@@ -105,17 +119,31 @@ list-style: none;
     max-width: 100%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin: 1rem 0rem 1rem 3rem;
-    padding:2rem 5rem 1rem 2rem;
+    padding:0.5rem 2rem 1.5rem 2rem;
     border-radius: 1rem;
+    position: relative;
 }
 
-.shop-image{
-   box-sizing: content-box;
-    margin: 2rem 0rem 5rem 0rem;
-    border-radius: 1rem;
-    
+.box-image{
+   
+   
+    border-radius: 1rem; 
+   
+    width:  400px;
+    height: auto;
+     position: relative;
+     top: 60px; left: 40px;
 
 }
+
+.shop-picture{
+    max-width:  400px;
+    height: auto;
+    border-radius: 1rem; 
+      
+  
+}
+
 
 .shop-card{
    
@@ -138,14 +166,20 @@ list-style: none;
     display: none;
 }
 
+.mentions__links {
+    
+    padding-right: 2rem;
+}
+
 @media screen and (min-width: 1100px) {
     
 .mentions {
 display: block;
- margin-top: 5*1rem;
+ margin-top: 6rem;
       }
 .mentions__list {
 display: flex;
+padding-right: 2rem;
 }
 }
 
@@ -178,9 +212,30 @@ color:white
     display: flex;
 }
 
+.avatar-container{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    margin-left: 2rem;
+    overflow: hidden;
+      
+
+}
 .user-avatar {
-    margin-left: 1rem;
-    width: 75px;
+    box-sizing: content-box;
+    width: 100%;
+    
+    
+}
+.bi {
+    font-size: 1.5rem;
+font-weight: bold;
+}
+
+.bi-plus-circle-dotted{
+margin-left: 4px;
+font-size: 1.5rem;
+font-weight: bold;
 }
 
 .button {
@@ -216,4 +271,12 @@ color:white
     border-radius: 1rem;
     background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
 }
+
+.product-picture{
+    width: 100px;
+}
+.shop-picture{
+    width: 400px;
+}
+
 

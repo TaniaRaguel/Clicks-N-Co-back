@@ -16,31 +16,30 @@
 	<section class="box-container">
 
 		<div class="profil-card">
-			<a href="{{ path('user_backoffice_shop_edit', {'name_slug': shop.nameslug}) }}">
+			
+
+			<h2>{{ shop.name|capitalize  }}   <a href="{{ path('user_backoffice_shop_edit', {'name_slug': shop.nameslug}) }}">
 				<i class="bi bi-pencil-square"></i>
-			</a>
+			</a></h2>
 
-			<h2>{{ shop.name }}</h2>
+			<p>{{ shop.description }}</p> <br>
 
-
-			<p>{{ shop.description }}</p>
-
-			<h3>Adresse</h3>
+			<h4>Adresse</h4>
 			<p>{{ shop.address }}</p>
 			<p>{{ shop.zipcode }}</p>
-			<p>{{ shop.city }}</p>
+			<p>{{ shop.city }}</p> <br>
 
-			<h3>Contact</h3>
+			<h4>Contact</h4>
 			<p>{{ shop.email }}</p>
-			<p>{{ shop.phonenumber }}</p>
+			<p>{{ shop.phonenumber }}</p><br>
 
-			<h3>Horaires d'ouvertures</h3>
+			<h4>Horaires d'ouvertures</h4>
 			<p>{{ shop.openinghours }}</p>
 		</div>
 
 
-		<div class="shop-image">
-			<div><img style="width: 400px" src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin"></div>
+		<div class="box-image">
+			<img  class = "shop-picture"  src="{{ asset ('images/shop/' ~ shop.picture)}}" alt="photo du magasin">
 
 		</div>
 
@@ -85,7 +84,7 @@
 					<tr>
 						<td>{{ product.name }}</td>
 						<td>{{ product.description }}</td>
-						<td><img style="width: 100px" src="{{ asset ('images/product/' ~ product.picture)}}" alt="photo du produit"></td>
+						<td><img class = "product-picture" src="{{ asset ('images/product/' ~ product.picture)}}" alt="photo du produit"></td>
 						<td>{{ product.uc }}</td>
 
 						<td>{{ product.price }}

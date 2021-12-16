@@ -32,10 +32,12 @@ class ShopController extends AbstractController
 
         $orders = $shop->getOrders();
         $ordersToPrepare = [];
+       
         foreach($orders as $order) {
             if($order->getStatus() == 0) {
                 $ordersToPrepare[] = $order;
             }
+        
         }
 
         return $this->render('user_back_office/shop/read.html.twig', [
@@ -43,6 +45,7 @@ class ShopController extends AbstractController
             'user' => $user,
             'products' => $shop->getProducts(),
             'orders' => $ordersToPrepare,
+            
         ]);
     }
 
