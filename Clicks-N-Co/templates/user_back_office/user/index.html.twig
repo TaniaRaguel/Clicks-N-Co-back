@@ -10,7 +10,10 @@
 		<section class="profil-card ">
 			<div class="name__profil">
 				<h2>Votre profil</h2>
+				<div class ="avatar-container">	
 				<img class="user-avatar" src="{{ asset ('images/user/' ~ user.avatar)}}" alt="avatar du user">
+				</div>
+			
 			</div>
 			
 
@@ -20,7 +23,7 @@
 					{{user.firstname}}
 					{{user.lastname}}</li>
 				<br>
-				<h3>Contact:</h3>
+				<h4>Contact:</h4>
 				<li>
 					{{user.email}}</li>
 
@@ -30,7 +33,7 @@
 				<br>
 
 			</ul>
-			<h3>Adresse:</h3>
+			<h4>Adresse:</h4>
 			<ul>
 				<li>
 					{{user.address}}</li>
@@ -43,12 +46,12 @@
 		</section>
 
 		<section class="shop-card">
-			<h3 for="shop-select">
+			<h4 for="shop-select">
 				{% if shops|length > 1 %}
 					Vos commerces
 				{% else %}
 					Votre commerce
-				</h3>
+				</h4>
 			{% endif %}
 			<a href="{{ path('user_backoffice_shop_add', {id: user.id}) }}">
 				<i class="bi bi-plus-circle-dotted"></i>
@@ -59,7 +62,7 @@
 
 			{% for shop in shops %}
 				<ul>
-					<li><a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }} ">{{ shop.name }}</a></li>
+					<li class= "list-shops"><a href="{{ path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }} ">{{ shop.name }}</a></li>
 				</ul>
 
 			{% endfor %}
