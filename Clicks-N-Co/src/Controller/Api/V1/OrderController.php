@@ -52,13 +52,14 @@ class OrderController extends AbstractController
     $order = new Order;
 
     $jsonArray = json_decode($request->getContent(), true);
-
-    $userId= $jsonArray["userCart"]["user"]["user"]["id"];
+    // dd($jsonArray);
+    $userId= $jsonArray["user"][1]["user"]["id"];
     $user = $userRepository->find($userId);
    
     
 
     $orderlines = $jsonArray["cart"];
+    
     // dd($orderlines);
     //________________________________
     // Recalcul du prix total pour vérification
