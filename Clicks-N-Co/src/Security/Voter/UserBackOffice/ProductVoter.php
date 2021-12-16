@@ -16,7 +16,7 @@ class ProductVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['READ', 'EDIT', 'ADD'])
+        return in_array($attribute, ['READ', 'EDIT', 'ADD', 'DELETE'])
 
             && $subject instanceof \App\Entity\User; 
     }
@@ -36,6 +36,7 @@ class ProductVoter extends Voter
           case 'READ':
           case 'EDIT':
           case 'ADD':
+          case 'DELETE':
             // logic to determine if the user can READ
             // return true or false
             if ($subject === $user) {
