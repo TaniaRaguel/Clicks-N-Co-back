@@ -2,13 +2,14 @@
 
 <div>
 <img class="logo" src="{{ asset('images/logo/icon.png') }}"  alt="logo">
-
 </div>
-{% if user is defined %}
-<div>
 
+{% if user is defined %}
+
+<div>
   <h1 class="header__title">Bienvenue  {{ user.firstname }} !</h1> 
   </div>
+  
 {% endif %}
 
 </header>
