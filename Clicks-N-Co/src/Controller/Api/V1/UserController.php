@@ -4,6 +4,7 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\Mailer;
 use App\Service\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class UserController extends AbstractController
   /**
    * @Route("", name="add", methods={"POST"})
    */
-  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher): Response
+  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer): Response
   {
     $user = new User;
 
@@ -44,6 +45,8 @@ class UserController extends AbstractController
 
       $manager->persist($user);
       $manager->flush();
+      
+      $mailer->sendEmailNewUser($user);
 
       return $this->json($user, 201);
     }
