@@ -26,10 +26,37 @@ class OrderController extends AbstractController
     $this->denyAccessUnlessGranted('READ', $user);
 
 
+    $ordersToPrepare = [];
+        $ordersPreparing = [];
+        $ordersPrepared = [];
+        $ordersArchived = [];
+        foreach($orders as $order) {
+            if($order->getStatus() == 0) {
+                $ordersToPrepare[] = $order;
+            }
+            if($order->getStatus() == 1) {
+                $ordersPreparing[] = $order;
+            }
+            if($order->getStatus() == 2) {
+                $ordersPrepared[] = $order;
+            }
+            if($order->getStatus() == 3) {
+                $ordersArchived[] = $order;
+            }
+        }
+
     return $this->render('user_back_office/order/read.html.twig', [
       'orders' => $orders,
       'user' => $user,
       'shop' => $shop,
+      'ordersPreparing' => $ordersPreparing,
+      'ordersToPrepare' => $ordersToPrepare,
+      'ordersPrepared' => $ordersPrepared,
+      'ordersArchived' => $ordersArchived,
+
+          
+
+           
     ]);
   }
 
