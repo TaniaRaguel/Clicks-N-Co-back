@@ -23,7 +23,7 @@ class ProductController extends AbstractController
    */
   public function read(Product $product)
   {
-    
+
     $shop = $product->getShop();
 
     $user = $shop->getUser();
@@ -53,7 +53,10 @@ class ProductController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
 
-      $imageUploader->uploadProductImage($form);
+      $picture = ($request->files->all()['product']['picture']);
+      if ($picture) {
+        $imageUploader->uploadProductImage($form);
+      }
 
       $manager->persist($product);
       $manager->flush();
@@ -62,7 +65,6 @@ class ProductController extends AbstractController
         'name_slug' => $shop->getNameSlug(),
 
       ]);
-
     }
 
     return $this->render('user_back_office/product/edit.html.twig', [
@@ -82,11 +84,11 @@ class ProductController extends AbstractController
 
   {
 
-    
+
     $product = new Product();
     $user = $shop->getUser();
     $this->denyAccessUnlessGranted('ADD', $user);
-    
+
     $product->getShop();
 
 
@@ -106,7 +108,6 @@ class ProductController extends AbstractController
         'name_slug' => $shop->getNameSlug(),
 
       ]);
-
     }
 
     return $this->render('user_back_office/product/add.html.twig', [
@@ -120,11 +121,11 @@ class ProductController extends AbstractController
    * @Route("/delete/{id}", name="delete")
    */
   public function delete(EntityManagerInterface $manager, Product $product)
-  { 
+  {
 
     $shop = $product->getShop();
     $user = $shop->getUser();
-     $this->denyAccessUnlessGranted('DELETE', $user);
+    $this->denyAccessUnlessGranted('DELETE', $user);
 
 
     $manager->remove($product);

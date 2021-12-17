@@ -25,19 +25,18 @@ class ShopController extends AbstractController
      * @Route("/{name_slug}", name="read")
      */
     public function read(Shop $shop): Response
-    {   
+    {
         $user = $shop->getUser();
-        
+
         $this->denyAccessUnlessGranted('READ', $user);
 
         $orders = $shop->getOrders();
         $ordersToPrepare = [];
-       
-        foreach($orders as $order) {
-            if($order->getStatus() == 0) {
+
+        foreach ($orders as $order) {
+            if ($order->getStatus() == 0) {
                 $ordersToPrepare[] = $order;
             }
-        
         }
 
         return $this->render('user_back_office/shop/read.html.twig', [
@@ -45,7 +44,7 @@ class ShopController extends AbstractController
             'user' => $user,
             'products' => $shop->getProducts(),
             'orders' => $ordersToPrepare,
-            
+
         ]);
     }
 
@@ -59,34 +58,39 @@ class ShopController extends AbstractController
     public function edit(EntityManagerInterface $manager, Request $request, Shop $shop, Slugger $slugger, ImageUploader $imageUploader)
     {
 
-        
+
         $user = $shop->getUser();
 
         $this->denyAccessUnlessGranted('EDIT', $user);
 
-        
-       
+
+
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $picture = ($request->files->all()['shop']['picture']);
 
-          $imageUploader->uploadShopImage($form);
+            if ($picture) {
+                $imageUploader->uploadShopImage($form);
+            }
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
-            
+
 
             $manager->flush();
 
-            return $this->redirectToRoute('user_backoffice_user_read', [
+            return $this->redirectToRoute('user_backoffice_shop_read', [
                 'id' => $user->getId(),
+                'name_slug' => $shop->getNameSlug(),
             ]);
         }
 
         return $this->render('user_back_office/shop/edit.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
+            'shop' => $shop,
         ]);
     }
 
@@ -109,7 +113,7 @@ class ShopController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-          $imageUploader->uploadShopImage($form);
+            $imageUploader->uploadShopImage($form);
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);

@@ -2,7 +2,7 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
   <div class="col-12">
-    <a href="{{path('user_backoffice_user_read', { id: user.id }) }}"><i class="bi bi-arrow-left-square-fill"></i></a>
+    <a href="{{path('user_backoffice_shop_read', {'name_slug': shop.nameslug}) }}"><i class="bi bi-arrow-left-square-fill"></i></a>
      </div>
     <div class="form">   <h2>
       Modifier un magasin
