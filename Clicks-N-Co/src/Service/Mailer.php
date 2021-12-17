@@ -56,15 +56,14 @@ class Mailer
       ->cc($shopEmail)
       ->subject('Nouvelle commande Clicks N Co !')
       ->embedFromPath('images/logo/icon.png', 'logo')
-      ->htmlTemplate('emails/new_user.html.twig')
+      ->htmlTemplate('emails/new_order_trader.html.twig')
       ->context([
         'logo' => 'logo',
         'firstname' => $firstName,
         'lastname' => $lastName,
+        'orderid' => $orderId,
+        'shopname' => $shopName,
       ]);
-      
-      // ->html('<h1>Nouvelle commande <strong>REF' . $orderId . '</strong> !</h1><br><h2>Bonjour ' . $shopName . ',</h2><br><p>Nous avons enregistré la commande <strong>REF' . $orderId . '</strong> pour votre client <strong>' . $firstName . ' ' . $lastname . '</strong>.</p><br><p>Vous pouvez, dès à présent, retrouver le détail de votre commande dans votre espace espace magasin.</p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</p></strong>');
-
     $this->mailer->send($email);
   }
 
@@ -87,15 +86,15 @@ class Mailer
       ->cc($userEmail)
       ->subject('Récupitulatif de votre commande Click N Co !')
       ->embedFromPath('images/logo/icon.png', 'logo')
-      ->htmlTemplate('emails/new_user.html.twig')
+      ->htmlTemplate('emails/new_order_customer.html.twig')
       ->context([
         'logo' => 'logo',
         'firstname' => $firstName,
         'lastname' => $lastName,
+        'orderid' => $orderId,
+        'shopname' => $shopName,
+        'totalprice' => $totalPrice,
       ]);
-     
-      // ->html('<h1>Votre commande <strong>REF' . $orderId . '</strong> est transmise à <strong>' . $shopName . '</strong> !</h1><br><h2>Bonjour <strong>' . $firstName . ' ' . $lastname . '</strong>,</h2><br><p>Votre commande <strong>REF' . $orderId . '</strong> a bien été transmise à <strong>' . $shopName . '</strong>.</p><br><p>Vous pouvez, dès à présent, retrouver le détail de votre commande dans votre espace espace client.</p><br><h2>Récapitulatif de votre commande</h2><br><p><strong><span style="margin-right: 50px">REF' . $orderId . '</span><span style="margin-right: 50px">' . $shopName . '</span><span style="margin-right: 50px">Prix Total ' . $totalPrice . ' Euros</span></strong></p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</strong></p>');
-
     $this->mailer->send($email);
   }
 
@@ -121,14 +120,23 @@ class Mailer
       ->cc($userEmail)
       ->subject('Votre commande est prête !')
       ->embedFromPath('images/logo/icon.png', 'logo')
-      ->htmlTemplate('emails/new_user.html.twig')
+      ->htmlTemplate('emails/ready_order.html.twig')
       ->context([
         'logo' => 'logo',
         'firstname' => $firstName,
         'lastname' => $lastName,
+        'logo' => 'logo',
+        'firstname' => $firstName,
+        'lastname' => $lastName,
+        'orderid' => $orderId,
+        'shopname' => $shopName,
+        'shopopeninghours' => $shopOpeningHours,
+        'shopadress' => $shopAdress,
+        'shopzipcode' => $shopZipCode,
+        'shopcity' => $shopCity,
       ]);
-      
-      // ->html('<h1>Votre commande <strong>REF' . $orderId . '</strong> est disponible !</h1><br><h2>Bonjour <strong>' . $firstName . ' ' . $lastname . '</strong>,</h2><br><p>Votre commande <strong>REF' . $orderId . '</strong> est disponible chez <strong>' . $shopName . '</strong>.</p><br><p>Vous pouvez la retirer.</p><br><h2>Horaires d\'ouvertures et adresse de ' . $shopName . '</h2><br><p><strong>' . $shopOpeningHours . '</strong></p><p><strong>' . $shopName . '</strong></p><p><strong>' . $shopAdress . '</strong></p><p><strong>' . $shopZipCode . ' ' . $shopCity . '</strong></p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</strong></p>');
+
+    // ->html('<h1>Votre commande <strong>REF' . $orderId . '</strong> est disponible !</h1><br><h2>Bonjour <strong>' . $firstName . ' ' . $lastname . '</strong>,</h2><br><p>Votre commande <strong>REF' . $orderId . '</strong> est disponible chez <strong>' . $shopName . '</strong>.</p><br><p>Vous pouvez la retirer.</p><br><h2>Horaires d\'ouvertures et adresse de ' . $shopName . '</h2><br><p><strong>' . $shopOpeningHours . '</strong></p><p><strong>' . $shopName . '</strong></p><p><strong>' . $shopAdress . '</strong></p><p><strong>' . $shopZipCode . ' ' . $shopCity . '</strong></p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</strong></p>');
 
     $this->mailer->send($email);
   }
