@@ -25,6 +25,7 @@ class ProductController extends AbstractController
   }
 
   /**
+   * Show every product
    * @Route("", name="browse", methods={"GET"})
    */
   public function browse(ProductRepository $productRepository): Response
@@ -35,6 +36,7 @@ class ProductController extends AbstractController
   }
 
   /**
+   * Show one product
    * @Route("/{id}", name="read", methods={"GET"})
    */
   public function read(Product $product): Response
@@ -45,6 +47,7 @@ class ProductController extends AbstractController
   }
 
   /**
+   * 
    * @Route("", name="add", methods={"POST"})
    */
   public function add(Request $request)
