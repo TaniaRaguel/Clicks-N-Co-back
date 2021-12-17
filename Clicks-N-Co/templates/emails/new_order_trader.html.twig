@@ -15,17 +15,18 @@
   <header>
     <img src="cid:logo" alt="logo" />
     <h1>
-      Bienvenue sur Clicks N Co, <strong>{{ firstname }} {{ lastname }}</strong>
-      !
+      Nouvelle commande <strong>REF{{ orderid }}</strong> !</h1>
     </h1>
   </header>
 
+  <h2>Bonjour {{ shopname }},</h2>
+
   <p>
-    Félicitations pour la création de votre compte !
+    Nous avons enregistré la commande <strong>REF{{ orderid }}</strong> pour votre client <strong>{{ firstname }} {{ lastname }}</strong>.
   </p>
 
   <p>
-    Vous pouvez, dès à présent, passer une commande !
+    Vous pouvez, dès à présent, retrouver le détail de votre commande dans votre espace magasin.
   </p>
 
   <footer>
@@ -37,7 +38,4 @@
     </p>
   </footer>
 </body>
-
 {% endapply %}
-
-{# '<body><h1><img src="cid:logo">Bienvenue sur Clicks N Co, <strong>' . $firstName . ' ' . $lastname . '</strong> !</h1><br><p>Félicitations pour la création de votre compte !</p><br><p>Vous pouvez, dès à présent, passer une commande !</p><br><p>À bientôt,</p><p>L\'équipe <strong>Clicks N Co</p></strong></body>' #}
