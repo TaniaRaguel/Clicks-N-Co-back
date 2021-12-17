@@ -103,9 +103,9 @@ class OrderController extends AbstractController
     $shop = $order->getShop();
     $shopId = $shop->getId();
     $orders = $shop->getOrders();
-
     $user = $shop->getUser();
-    $manager->remove($order);
+
+    $order->setStatus(4);
     $manager->flush();
 
     return $this->redirectToRoute('user_backoffice_order_read', [
