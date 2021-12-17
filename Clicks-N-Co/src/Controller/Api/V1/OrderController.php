@@ -45,26 +45,32 @@ class OrderController extends AbstractController
   }
 
   /**
+   * Add a new order with orderlines 
+   * 
    * @Route("", name="add", methods={"POST"})
    */
   public function add(EntityManagerInterface $manager, Request $request, Mailer $mailer,  UserRepository $userRepository, ShopRepository $shopRepository, ProductRepository $productRepository): Response
   {
     $order = new Order;
 
+    // We recover and decode the informationS from the front
     $jsonArray = json_decode($request->getContent(), true);
 
-   
 
-    $userId= $jsonArray["user"]["user"]["id"];
+    // We recover the user with the user id
+    $userId = $jsonArray["user"];
     $user = $userRepository->find($userId);
-   
-    
 
+
+    // We recover the cart and the total price
     $orderlines = $jsonArray["cart"];
+    $cartTotal = $jsonArray["total"];
+
     
-    // dd($orderlines);
     //________________________________
-    // Recalcul du prix total pour vérification
+    // We are checking that we have the same result, if we do we send the order and orderlines th the database,
+    //If not we have an error message
+
     $verifiedTotal = 0;
     $productIdList = [];
 
@@ -72,74 +78,64 @@ class OrderController extends AbstractController
       $productId = $orderline["id"];
       $quantity = $orderline["quantity"];
       $price = $orderline["price"];
-    
 
-      $lineTotal = $quantity *$price;
+
+      $lineTotal = $quantity * $price;
       $verifiedTotal = $verifiedTotal + $lineTotal;
       $productIdList[] = $productId;
     }
     //________________________________________
 
-    $product = $productRepository->find($productIdList[0]);
-    $shop = $product->getshop();
-    
+    if ($verifiedTotal == $cartTotal) {
 
-    $order->setTotalPrice($verifiedTotal);
+      //For the order :
+      //We get the shop with the product list
+      $product = $productRepository->find($productIdList[0]);
+      $shop = $product->getshop();
 
 
-   /*  $form = $this->createForm(OrderType::class, $order, ['csrf_protection' => false],);
-    $form->submit($order); */
- 
-    /* if ($form->isValid()) { */
-
+      $order->setTotalPrice($verifiedTotal);
       $order->setUser($user);
       $order->setShop($shop);
       $order->setStatus(0);
-     
+
       $manager->persist($order);
       $manager->flush();
 
-
+      //A validation email is sent to the customer and another one for the shop, to start preparing the order
       $mailer->sendEmailNewOrderTrader($order);
       $mailer->sendEmailNewOrderCustomer($order);
 
+      //For the orderlines :
+      //to register the orderlines, we have to register first the order and then each orderline 
 
-    foreach ($orderlines as $orderline) {
-      $productId = $orderline["id"];
-      $product = $productRepository->find($productId);
-      $quantity = $orderline["quantity"];
-      $price = $orderline["price"];
-      $lineTotal = $quantity *$price;
+      foreach ($orderlines as $orderline) {
+        $productId = $orderline["id"];
+        $product = $productRepository->find($productId);
+        $quantity = $orderline["quantity"];
+        $price = $orderline["price"];
+        $lineTotal = $quantity * $price;
 
-      $orderline = new Orderline;
-     $orderline->setOrderRef($order);
+        $orderline = new Orderline;
+        $orderline->setOrderRef($order);
 
-     $orderline->setQuantity($quantity);
-     $orderline->setPrice($lineTotal);
-    
-     $orderline->setProduct($product);    
+        $orderline->setQuantity($quantity);
+        $orderline->setPrice($lineTotal);
 
-     $manager->persist($orderline);
-     $manager->flush();
+        $orderline->setProduct($product);
+
+        $manager->persist($orderline);
+        $manager->flush();
+      }
+      //_
+
+      return $this->json($shop, 201, [], ['groups' => ['shop_add'] ]);
     }
-    //_
 
-      return $this->json($shop, 201, [],[
-          'groups' => ['shop_add']
-
-        ]
-      );
-   /*  } */
-   
-    /* $errorMessages = [];
-    foreach ($form->getErrors(true) as $error) {
-      $errorMessages[] = [
-        'property' => $error->getOrigin()->getName(),
-        'message' => $error->getMessage(),
-      ]; 
-  } */
-  /*  return $this->json($errorMessages, 400); */
-  } 
+     $error = "erreur lors de l'envoi de la commande" ;
+    
+      return $this->json($error, 400); 
+  }
 
 
 

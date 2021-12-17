@@ -145,6 +145,8 @@ class CategoryController extends AbstractController
     }
 
      /**
+      * 
+      * Delete one category
      * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Shop $shop)
