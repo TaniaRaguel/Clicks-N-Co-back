@@ -55,12 +55,12 @@ class OrderController extends AbstractController
 
    
 
-    $userId= $jsonArray['userCart']["user"]["user"]["id"];
+    $userId= $jsonArray["user"]["user"]["id"];
     $user = $userRepository->find($userId);
    
     
 
-    $orderlines = $jsonArray['userCart']["cart"];
+    $orderlines = $jsonArray["cart"];
     
     // dd($orderlines);
     //________________________________
