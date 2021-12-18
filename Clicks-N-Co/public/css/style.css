@@ -297,3 +297,25 @@ font-weight: bold;
 .shop-card__text {
     font-size: 0.8rem;
 }
+
+.container404 {
+    /* width: 100vh; */
+    height: 100vh;
+    background-image: url("../images/404.jpg");
+    background-size: cover;
+}
+
+.title-404 {
+    text-align: right;
+    margin: 0;
+    padding-top: 100px;
+    padding-right: 100px;
+}
+
+.title-404 h1 {
+    color: black;
+}
+
+.link-404 {
+    padding-right: 100px;
+}
