@@ -145,29 +145,24 @@ list-style: none;
 }
 
 
-.shop-card{
-   
-   
+.shop-card{ 
     border : 0.5px solid rgb(230, 224, 224);
     max-width: 100%;
     margin: 5rem 0rem 5rem 0rem;
-    padding:2rem 5rem 3rem 2rem;
+    padding:2rem 0rem 3rem 0.5rem;
     border-radius: 1rem;
 }
 
 .form{
     background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
     padding: 1rem 5rem 1rem 5rem
-
-
 }
 
 .mentions {
     display: none;
 }
 
-.mentions__links {
-    
+.mentions__links {   
     padding-right: 2rem;
 }
 
@@ -176,7 +171,7 @@ list-style: none;
 .mentions {
 display: block;
  margin-top: 6rem;
-      }
+}
 .mentions__list {
 display: flex;
 padding-right: 2rem;
@@ -279,4 +274,26 @@ font-weight: bold;
     width: 400px;
 }
 
+.shoplist-card {
+    width: 25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 
+.shop-item {
+    width: 9rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.shop-card__picture {
+    border-radius: 1rem;
+    width: 142px;
+    height: 140px;
+}
+
+.shop-card__text {
+    font-size: 0.8rem;
+}
