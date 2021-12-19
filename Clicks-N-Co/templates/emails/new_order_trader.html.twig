@@ -1,0 +1,41 @@
+{% apply inline_css %}
+<style>
+  @import
+  url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,700&display=swap');
+
+  body { font-family: 'Roboto', sans-serif; }
+
+  header { background-color: #F7F0E9; display: flex; flex-direction: row; align-self: center; }
+
+  a { text-decoration: none; color: #DE4E4E;}
+
+  strong { text-transform: capitalize; }
+</style>
+<body>
+  <header>
+    <img src="cid:logo" alt="logo" />
+    <h1>
+      Nouvelle commande <strong>REF{{ orderid }}</strong> !</h1>
+    </h1>
+  </header>
+
+  <h2>Bonjour {{ shopname }},</h2>
+
+  <p>
+    Nous avons enregistré la commande <strong>REF{{ orderid }}</strong> pour votre client <strong>{{ firstname }} {{ lastname }}</strong>.
+  </p>
+
+  <p>
+    Vous pouvez, dès à présent, retrouver le détail de votre commande dans votre espace magasin.
+  </p>
+
+  <footer>
+    <p>
+      À bientôt,
+    </p>
+    <p>
+      L'équipe <strong><a href="#">Clicks N Co</a></strong>
+    </p>
+  </footer>
+</body>
+{% endapply %}

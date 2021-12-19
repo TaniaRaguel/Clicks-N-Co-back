@@ -1,0 +1,61 @@
+{% apply inline_css %}
+<style>
+  @import
+  url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,700&display=swap');
+
+  body { font-family: 'Roboto', sans-serif; }
+
+  header { background-color: #F7F0E9; display: flex; flex-direction: row;
+  align-self: center; }
+
+  a { text-decoration: none; color: #DE4E4E;}
+
+  strong { text-transform: capitalize; }
+</style>
+<body>
+  <header>
+    <img src="cid:logo" alt="logo" />
+    <h1>
+      Votre commande <strong>REF{{ orderid }}</strong> est transmise à <strong>
+        {{ shopname }}
+      </strong> !
+    </h1>
+  </header>
+
+  <h2>
+    Bonjour <strong>{{ firstname }} {{ lastname }}</strong>,
+  </h2>
+
+  <p>
+    Votre commande <strong>REF{{ orderid }}</strong> a bien été transmise à <strong>
+      {{ shopname }}
+    </strong>.
+  </p>
+  <p>
+    Vous pouvez, dès à présent, retrouver le détail de votre commande dans votre espace client.
+  </p>
+
+  <h2>
+    Récapitulatif de votre commande
+  </h2>
+
+  <p>
+    <strong>
+      <span style="margin-right: 50px">REF{{ orderid }}</span><span style="margin-right: 50px">
+        {{ shopname }}
+      </span><span style="margin-right: 50px">
+        Prix Total {{ totalprice }} €
+      </span>
+    </strong>
+  </p>
+
+  <footer>
+    <p>
+      À bientôt,
+    </p>
+    <p>
+      L'équipe <strong><a href="#">Clicks N Co</a></strong>
+    </p>
+  </footer>
+</body>
+{% endapply %}
