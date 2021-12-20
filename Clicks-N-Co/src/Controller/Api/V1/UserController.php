@@ -24,7 +24,7 @@ class UserController extends AbstractController
   /**
    * @Route("", name="add", methods={"POST"})
    */
-  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer, ImageUploader $imageUploader): Response
+  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer): Response
   {
     $user = new User;
 
@@ -43,8 +43,6 @@ class UserController extends AbstractController
       $user->setRoles(['ROLE_USER']);
 
       $slugger->slugifyUserCity($user);
-
-      $imageUploader->uploadUserImage($form);
 
       $manager->persist($user);
       $manager->flush();
