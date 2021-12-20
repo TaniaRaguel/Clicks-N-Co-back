@@ -374,3 +374,6 @@ h1, .name, .role {
     padding-right: 100px;
 }
 
+.login-form {
+    margin-bottom: 15rem;
+}
