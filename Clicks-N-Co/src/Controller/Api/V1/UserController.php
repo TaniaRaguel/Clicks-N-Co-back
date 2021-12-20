@@ -120,4 +120,5 @@ class UserController extends AbstractController
       'groups' => ['user_read'],
     ]);
   }
+  
 }
