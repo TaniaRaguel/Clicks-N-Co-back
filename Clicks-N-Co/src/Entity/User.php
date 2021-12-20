@@ -114,7 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JsonSer
 
     /**
      * @Groups({"shop_homeShop","shop_search", "shop_browse", "shop_read"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default": "avatardefault.jpg"})
      * @Groups({"user_read"})
      */
     private $avatar;
