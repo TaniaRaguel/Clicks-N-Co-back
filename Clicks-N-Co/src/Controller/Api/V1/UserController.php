@@ -44,8 +44,6 @@ class UserController extends AbstractController
 
       $slugger->slugifyUserCity($user);
 
-      $imageUploader->uploadUserImage($form);
-
       $manager->persist($user);
       $manager->flush();
       
