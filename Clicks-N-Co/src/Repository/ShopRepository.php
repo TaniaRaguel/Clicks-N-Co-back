@@ -72,6 +72,34 @@ class ShopRepository extends ServiceEntityRepository
 
 
 
+    /**
+     * DQL : Doctrine Query Language
+     * 
+     * Retourne les villes qui correspondent à une categorie
+     *
+     * @return void
+     */
+    public function findAllByCategory($searchTerm)
+    {
+        // Etape 1 : On appelle le manager
+        $manager = $this->getEntityManager();
+
+        // Etape 2 : On prépare la Requete SQL
+        $query = $manager->createQuery(
+            'SELECT shop, category
+            FROM App\Entity\shop shop
+            JOIN shop.categories category
+            WHERE category.name LIKE :searchTerm
+            
+            '
+        )
+            // On prépare le paramètre (nettoyage de sécurité)
+            ->setParameter(':searchTerm', "%$searchTerm%");
+
+        // On execute, qui nous retourne un résultat
+        return $query->getResult();
+    }
+
 
     // /**
     //  * @return Shop[] Returns an array of Shop objects
