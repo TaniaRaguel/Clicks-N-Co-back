@@ -24,7 +24,7 @@ class UserController extends AbstractController
   /**
    * @Route("", name="add", methods={"POST"})
    */
-  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer, ImageUploader $imageUploader): Response
+  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer): Response
   {
     $user = new User;
 
@@ -120,4 +120,5 @@ class UserController extends AbstractController
       'groups' => ['user_read'],
     ]);
   }
+  
 }
