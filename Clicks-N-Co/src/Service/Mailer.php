@@ -26,7 +26,7 @@ class Mailer
 
     $email = (new TemplatedEmail())
       ->from('clicksnco@gmail.com')
-      ->to('clicksnco-d601f7@inbox.mailtrap.io')
+      ->to('bf8a7a761c-f883fa@inbox.mailtrap.io')
       ->cc($userEmail)
       ->subject('Bienvenue sur Clicks N Co !')
       ->embedFromPath('images/logo/icon.png', 'logo')
@@ -52,7 +52,7 @@ class Mailer
 
     $email = (new TemplatedEmail())
       ->from('clicksnco@gmail.com')
-      ->to('clicksnco-d601f7@inbox.mailtrap.io')
+      ->to('bf8a7a761c-f883fa@inbox.mailtrap.io')
       ->cc($shopEmail)
       ->subject('Nouvelle commande Clicks N Co !')
       ->embedFromPath('images/logo/icon.png', 'logo')
@@ -82,7 +82,7 @@ class Mailer
 
     $email = (new TemplatedEmail())
       ->from('clicksnco@gmail.com')
-      ->to('clicksnco-d601f7@inbox.mailtrap.io')
+      ->to('bf8a7a761c-f883fa@inbox.mailtrap.io')
       ->cc($userEmail)
       ->subject('Récupitulatif de votre commande Click N Co !')
       ->embedFromPath('images/logo/icon.png', 'logo')
@@ -116,7 +116,7 @@ class Mailer
 
     $email = (new TemplatedEmail())
       ->from('clicksnco@gmail.com')
-      ->to('clicksnco-d601f7@inbox.mailtrap.io')
+      ->to('bf8a7a761c-f883fa@inbox.mailtrap.io')
       ->cc($userEmail)
       ->subject('Votre commande est prête !')
       ->embedFromPath('images/logo/icon.png', 'logo')
