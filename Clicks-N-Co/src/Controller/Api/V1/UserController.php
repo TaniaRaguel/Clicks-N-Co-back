@@ -4,6 +4,7 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\ImageUploader;
 use App\Service\Mailer;
 use App\Service\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,7 +24,7 @@ class UserController extends AbstractController
   /**
    * @Route("", name="add", methods={"POST"})
    */
-  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer): Response
+  public function add(EntityManagerInterface $manager, Request $request, Slugger $slugger, UserPasswordHasherInterface $userPasswordHasher, Mailer $mailer, ImageUploader $imageUploader): Response
   {
     $user = new User;
 
@@ -42,6 +43,8 @@ class UserController extends AbstractController
       $user->setRoles(['ROLE_USER']);
 
       $slugger->slugifyUserCity($user);
+
+      $imageUploader->uploadUserImage($form);
 
       $manager->persist($user);
       $manager->flush();
@@ -66,7 +69,7 @@ class UserController extends AbstractController
    * @Route("/{id}", name="edit", methods={"PUT", "PATCH"})
    * 
    */
-  public function edit(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, UserPasswordHasherInterface $userPasswordHasher): Response
+  public function edit(EntityManagerInterface $manager, Request $request, Slugger $slugger, User $user, UserPasswordHasherInterface $userPasswordHasher, ImageUploader $imageUploader): Response
   {
     $this->denyAccessUnlessGranted('EDIT', $user);
 
@@ -84,6 +87,11 @@ class UserController extends AbstractController
       }
 
       $slugger->slugifyUserCity($user);
+
+      $picture = ($request->files->all()['user']['picture']);
+      if ($picture) {
+        $imageUploader->uploadUserImage($form);
+      }
 
       $manager->flush();
 

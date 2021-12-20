@@ -84,4 +84,13 @@ class ImageUploader
 
     $shop->setPicture($newFilename);
   }
+
+  public function uploadUserImage(Form $form)
+  {
+    $shop = $form->getData();
+
+    $newFilename = $this->uploadImage($form, 'picture', $_ENV['IMAGES_USER']);
+
+    $shop->setPicture($newFilename);
+  }
 }
