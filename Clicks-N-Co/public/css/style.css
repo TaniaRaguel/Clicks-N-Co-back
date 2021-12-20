@@ -6,7 +6,7 @@ padding: 2rem 10rem 2rem 10rem;
 
 header{
 
-background: linear-gradient(93deg, #014019 13%, rgba(1, 64, 25, 0.57) 103%);
+background: #EADDC5;
 padding: 1rem 1rem;
 
 }
@@ -14,6 +14,7 @@ padding: 1rem 1rem;
 .footer-container{
 display: flex;
 justify-content: space-between;
+background-color: #EADDC5;
 }
 
 .footer__title{
@@ -23,10 +24,12 @@ font-size: 1rem;
 
 .footer{
 padding-bottom: 1rem !important;
+background-color: #EADDC5;
+
 }
 
 .footer .has-background-color {
-background-color: darkgray;
+background-color: #EADDC5;
 
     }
 
@@ -63,8 +66,9 @@ font-size: 2rem;
      
 h1{
 color:white;
-font-size: 2.5rem; 
+font-size: 2.2rem; 
 font-family: 'Roboto Slab', serif;
+font-weight: bold;
 }
 
 h2{
@@ -93,7 +97,7 @@ h4{
 
 .box-container{
 
-background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+background:  #FDFAFA;
 padding: 3rem 5rem;
 margin-bottom: 3rem;
 display:flex;
@@ -155,7 +159,7 @@ list-style: none;
 }
 
 .form{
-    background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+    background:  #EADDC5;
     padding: 1rem 5rem 1rem 5rem
 }
 
@@ -250,7 +254,7 @@ font-weight: bold;
     margin: 5rem 0rem 5rem 0rem;
     padding:2rem 5rem 3rem 2rem;
     border-radius: 1rem;
-    background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+    background:  #EADDC5;
     display: flex;
     justify-content: space-between;
 }
@@ -265,7 +269,7 @@ font-weight: bold;
     margin: 5rem 0rem 5rem 0rem;
     padding:2rem 5rem 3rem 2rem;
     border-radius: 1rem;
-    background:  linear-gradient(to right, #b4d1c3,  hsl(150, 16%, 87%) 50%);
+    background: #EADDC5;
 }
 
 .product-picture{
