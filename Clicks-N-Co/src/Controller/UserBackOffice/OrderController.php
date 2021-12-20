@@ -79,7 +79,7 @@ class OrderController extends AbstractController
     } elseif ($order->getStatus() == 1) {
       $order->setStatus(2);
       $order->setUpdatedAt(new \DateTimeImmutable());
-      $mailer->sendReadyOrder($order);
+      // $mailer->sendReadyOrder($order);
       $manager->flush();
     } elseif ($order->getStatus() == 2) {
       $order->setStatus(3);

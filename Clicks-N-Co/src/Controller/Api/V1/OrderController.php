@@ -103,8 +103,8 @@ class OrderController extends AbstractController
       $manager->flush();
 
       //A validation email is sent to the customer and another one for the shop, to start preparing the order
-      $mailer->sendEmailNewOrderTrader($order);
-      $mailer->sendEmailNewOrderCustomer($order);
+      // $mailer->sendEmailNewOrderTrader($order);
+      // $mailer->sendEmailNewOrderCustomer($order);
 
       //For the orderlines :
       //to register the orderlines, we have to register first the order and then each orderline 

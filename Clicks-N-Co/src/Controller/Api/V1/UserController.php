@@ -46,7 +46,7 @@ class UserController extends AbstractController
       $manager->persist($user);
       $manager->flush();
       
-      $mailer->sendEmailNewUser($user);
+      // $mailer->sendEmailNewUser($user);
 
       return $this->json($user, 201);
     }
