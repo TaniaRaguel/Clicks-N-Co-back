@@ -63,7 +63,8 @@ font-size: 2rem;
      
 h1{
 color:white;
-font-size: 2.5rem;
+font-size: 2.5rem; 
+font-family: 'Roboto Slab', serif;
 }
 
 h2{
@@ -305,6 +306,55 @@ font-weight: bold;
     background-size: cover;
 }
 
+
+
+.team-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+}
+
+.avatar-profil{
+    display:flex;
+    align-items: center;
+    margin: 0 1rem 1.5rem 1rem;
+    flex-direction: column;
+  /*   background-color: white; */
+    padding: 2rem 0.8rem 0;
+   
+    ;
+   
+
+}
+
+ .role{
+    display:block;
+    font-size: 1rem;
+    margin-bottom:1rem;
+    font-weight: bold;
+}
+
+h1, .name, .role {
+    font-style: roboto slab sans serif;
+}
+
+.name{
+    background-color: white;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem;
+    margin:1rem;
+}
+
+.avataar{
+    width: 100px;
+
+}
+
+
+
+
 .title-404 {
     text-align: right;
     margin: 0;
@@ -319,3 +369,4 @@ font-weight: bold;
 .link-404 {
     padding-right: 100px;
 }
+
