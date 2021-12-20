@@ -215,4 +215,30 @@ class ShopController extends AbstractController
 
     ]);
   }
+  
+
+
+  /**
+   * search by category 
+   * 
+   * @route("/searchbycategory", name="categorySearch", methods={"POST"})
+   *
+   * @param Request $request
+   * @param ShopRepository $shopRepository
+   * @return Response
+   */
+  public function resultsByCategory(Request $request, ShopRepository $shopRepository): Response
+  {
+
+    /*  $searchCity = $request->get('search'); */
+    $jsonArray = json_decode($request->getContent(), true);
+    $searchCategory = trim($jsonArray["category"]);
+
+
+    // 3) On transmet le résultat à la vue HTML
+    return $this->json($shopRepository->findAllBycategory($searchCategory), 200, [], [
+      'groups' => ['shop_search']
+
+    ]);
+  }
 }
