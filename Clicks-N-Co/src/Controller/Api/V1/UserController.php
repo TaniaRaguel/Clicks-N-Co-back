@@ -42,6 +42,8 @@ class UserController extends AbstractController
 
       $user->setRoles(['ROLE_USER']);
 
+      $user->setAvatar('avatardefault.jpg');
+
       $slugger->slugifyUserCity($user);
 
       $manager->persist($user);
