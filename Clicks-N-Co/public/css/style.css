@@ -307,6 +307,7 @@ font-weight: bold;
 }
 
 
+
 .team-container{
     display:flex;
     flex-direction: row;
@@ -350,6 +351,7 @@ h1, .name, .role {
     width: 100px;
 
 }
+
 
 
 
