@@ -27,23 +27,23 @@ class OrderController extends AbstractController
 
 
     $ordersToPrepare = [];
-        $ordersPreparing = [];
-        $ordersPrepared = [];
-        $ordersArchived = [];
-        foreach($orders as $order) {
-            if($order->getStatus() == 0) {
-                $ordersToPrepare[] = $order;
-            }
-            if($order->getStatus() == 1) {
-                $ordersPreparing[] = $order;
-            }
-            if($order->getStatus() == 2) {
-                $ordersPrepared[] = $order;
-            }
-            if($order->getStatus() == 3) {
-                $ordersArchived[] = $order;
-            }
-        }
+    $ordersPreparing = [];
+    $ordersPrepared = [];
+    $ordersArchived = [];
+    foreach ($orders as $order) {
+      if ($order->getStatus() == 0) {
+        $ordersToPrepare[] = $order;
+      }
+      if ($order->getStatus() == 1) {
+        $ordersPreparing[] = $order;
+      }
+      if ($order->getStatus() == 2) {
+        $ordersPrepared[] = $order;
+      }
+      if ($order->getStatus() == 3) {
+        $ordersArchived[] = $order;
+      }
+    }
 
     return $this->render('user_back_office/order/read.html.twig', [
       'orders' => $orders,
@@ -54,9 +54,9 @@ class OrderController extends AbstractController
       'ordersPrepared' => $ordersPrepared,
       'ordersArchived' => $ordersArchived,
 
-          
 
-           
+
+
     ]);
   }
 
@@ -79,7 +79,7 @@ class OrderController extends AbstractController
     } elseif ($order->getStatus() == 1) {
       $order->setStatus(2);
       $order->setUpdatedAt(new \DateTimeImmutable());
-      // $mailer->sendReadyOrder($order);
+      $mailer->sendReadyOrder($order);
       $manager->flush();
     } elseif ($order->getStatus() == 2) {
       $order->setStatus(3);

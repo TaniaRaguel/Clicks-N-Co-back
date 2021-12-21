@@ -49,7 +49,7 @@ class UserController extends AbstractController
       $manager->persist($user);
       $manager->flush();
       
-      // $mailer->sendEmailNewUser($user);
+      $mailer->sendEmailNewUser($user);
 
       return $this->json($user, 201);
     }
@@ -99,9 +99,6 @@ class UserController extends AbstractController
       else {
         $user->getAvatar();
       }    
-      
-      $user->setRoles($user->getRoles());
-
 
       $user->setRoles($user->getRoles());
       $user->setUpdatedAt(new \DateTimeImmutable());
