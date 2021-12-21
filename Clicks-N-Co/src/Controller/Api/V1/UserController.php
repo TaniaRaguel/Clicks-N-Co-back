@@ -77,21 +77,28 @@ class UserController extends AbstractController
 
     $jsonArray = json_decode($request->getContent(), true);
 
-    $form->submit($jsonArray);
+    if(isset($jsonArray['password']) && $jsonArray['password'] != null) {
+      $password = $jsonArray['password']; 
+      $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
+      $user->setPassword($hashedPassword);
+    }
+    else {
+      $jsonArray['password'] = $user->getPassword();
+    }
+
+    $form->submit($jsonArray); 
 
     if ($form->isValid()) {
-      $password = $jsonArray['password'];
-      if ($password != null) {
-        $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
-        $user->setPassword($hashedPassword);
-      }
 
       $slugger->slugifyUserCity($user);
-
-      $picture = ($request->files->all()['user']['picture']);
+     
+      $picture = ($request->files->all());
       if ($picture) {
         $imageUploader->uploadUserImage($form);
       }
+      else {
+        $user->getAvatar();
+      }    
 
       $manager->flush();
 
