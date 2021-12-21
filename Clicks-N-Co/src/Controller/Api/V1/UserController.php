@@ -103,6 +103,9 @@ class UserController extends AbstractController
       $user->setRoles($user->getRoles());
 
 
+      $user->setRoles($user->getRoles());
+      $user->setUpdatedAt(new \DateTimeImmutable());
+
       $manager->flush();
 
       return $this->json($user, 200);

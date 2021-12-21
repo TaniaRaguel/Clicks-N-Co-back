@@ -57,6 +57,8 @@ class ProductController extends AbstractController
       if ($picture) {
         $imageUploader->uploadProductImage($form);
       }
+      
+      $product->setUpdatedAt(new \DateTimeImmutable());
 
       $manager->persist($product);
       $manager->flush();
