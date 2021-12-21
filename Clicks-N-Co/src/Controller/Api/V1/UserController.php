@@ -102,6 +102,7 @@ class UserController extends AbstractController
       
       $user->setRoles($user->getRoles());
 
+
       $manager->flush();
 
       return $this->json($user, 200);
