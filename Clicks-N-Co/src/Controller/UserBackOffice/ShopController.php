@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\ShopType;
 use App\Service\ImageUploader;
 use App\Service\Slugger;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +78,7 @@ class ShopController extends AbstractController
 
             $slugger->slugifyShopName($shop);
             $slugger->slugifyShopCity($shop);
-
+            $shop->setUpdatedAt(new \DateTimeImmutable());
 
             $manager->flush();
 

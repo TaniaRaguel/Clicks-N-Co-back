@@ -99,8 +99,9 @@ class UserController extends AbstractController
       else {
         $user->getAvatar();
       }    
-      
+
       $user->setRoles($user->getRoles());
+      $user->setUpdatedAt(new \DateTimeImmutable());
 
       $manager->flush();
 
