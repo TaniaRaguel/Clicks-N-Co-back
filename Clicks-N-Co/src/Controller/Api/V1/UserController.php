@@ -99,6 +99,9 @@ class UserController extends AbstractController
       else {
         $user->getAvatar();
       }    
+      
+      $user->setRoles($user->getRoles());
+
 
       $manager->flush();
 
