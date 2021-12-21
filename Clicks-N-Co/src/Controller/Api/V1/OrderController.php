@@ -66,7 +66,7 @@ class OrderController extends AbstractController
     $orderlines = $jsonArray["cart"];
     $cartTotal = $jsonArray["total"];
 
-    
+
     //________________________________
     // We are checking that we have the same result, if we do we send the order and orderlines th the database,
     //If not we have an error message
@@ -103,8 +103,8 @@ class OrderController extends AbstractController
       $manager->flush();
 
       //A validation email is sent to the customer and another one for the shop, to start preparing the order
-      // $mailer->sendEmailNewOrderTrader($order);
-      // $mailer->sendEmailNewOrderCustomer($order);
+      $mailer->sendEmailNewOrderTrader($order);
+      $mailer->sendEmailNewOrderCustomer($order);
 
       //For the orderlines :
       //to register the orderlines, we have to register first the order and then each orderline 
@@ -129,12 +129,12 @@ class OrderController extends AbstractController
       }
       //_
 
-      return $this->json($shop, 201, [], ['groups' => ['shop_add'] ]);
+      return $this->json($shop, 201, [], ['groups' => ['shop_add']]);
     }
 
-     $error = "erreur lors de l'envoi de la commande" ;
-    
-      return $this->json($error, 400); 
+    $error = "erreur lors de l'envoi de la commande";
+
+    return $this->json($error, 400);
   }
 
 
