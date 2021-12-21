@@ -25,7 +25,7 @@ class UserType extends AbstractType
           new NotBlank(),
         ]
       ])
-      ->add('roles')
+      // ->add('roles')
       ->add('password', PasswordType::class, [
         'constraints' => new NotBlank,
       ])
@@ -63,18 +63,18 @@ class UserType extends AbstractType
         'mapped' => false,
         'required' => false,
       ]);
-    $builder->get('roles')->addModelTransformer(new CallbackTransformer(
+    // $builder->get('roles')->addModelTransformer(new CallbackTransformer(
 
-      function ($tagsAsArray) {
-        // transform the array to a string
-        return $tagsAsArray[0];
-      },
-      // La fonction qui prend la donnée du form et la transforme pour être compatible avec l'entité
-      function ($tagsAsString) {
-        // transform the string back to an array
-        return [$tagsAsString];
-      }
-    ));
+    //   function ($tagsAsArray) {
+    //     // transform the array to a string
+    //     return $tagsAsArray[0];
+    //   },
+    //   // La fonction qui prend la donnée du form et la transforme pour être compatible avec l'entité
+    //   function ($tagsAsString) {
+    //     // transform the string back to an array
+    //     return [$tagsAsString];
+    //   }
+    // ));
   }
 
   public function configureOptions(OptionsResolver $resolver): void
