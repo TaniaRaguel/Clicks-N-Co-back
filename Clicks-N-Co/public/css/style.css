@@ -310,27 +310,35 @@ font-weight: bold;
     background-size: cover;
 }
 
-
+.team{
+    margin-bottom: 2rem;
+    padding:0.5 0rem;
+}
 
 .team-container{
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    padding: auto;
+  
    
 }
 
 .avatar-profil{
     display:flex;
     align-items: center;
-    margin: 0 1rem 1.5rem 1rem;
+    margin: 0 1rem 0.5rem 0.5rem;
     flex-direction: column;
+    flex-grow: 1;
+  
   /*   background-color: white; */
-    padding: 2rem 0.8rem 0;
+    padding: 2rem 1rem 0;
    
     ;
    
 
 }
+
+
 
  .role{
     display:block;
@@ -348,11 +356,12 @@ h1, .name, .role {
     font-size: 0.9rem;
     border-radius: 5px;
     padding: 0.5rem 0.5rem;
-    margin:1rem;
+    -webkit-margin-bottom-collapse:1rem;
 }
 
 .avataar{
-    width: 100px;
+    max-width: 90px;
+    margin-bottom: 0.5rem;
 
 }
 
