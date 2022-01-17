@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
     $user1->setCity('Bayonne');
     $user1->setCitySlug('bayonne');
     $user1->setCreatedAt(new \DateTimeImmutable());
-    $user1->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
+    $user1->setAvatar('avatar1.jpg');
 
     $manager->persist($user1);
 
@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
     $user2->setCity('Paris');
     $user2->setCitySlug('paris');
     $user2->setCreatedAt(new \DateTimeImmutable());
-    $user2->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
+    $user2->setAvatar('avatar2.jpg');
 
     $manager->persist($user2);
 
@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
     $user3->setCity('Marseille');
     $user3->setCitySlug('marseille');
     $user3->setCreatedAt(new \DateTimeImmutable());
-    $user3->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
+    $user3->setAvatar('avatar3.jpg');
 
     $manager->persist($user3);
 
@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
     $user4->setCity('Lyon');
     $user4->setCitySlug('lyon');
     $user4->setCreatedAt(new \DateTimeImmutable());
-    $user4->setAvatar($generator->imageUrl(180, 180, 'Avatar', true));
+    $user4->setAvatar('avatar4.jpg');
 
     $manager->persist($user4);
 
@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
 
     $category1 = new Category();
     $category1->setname('primeur');
-    $category1->setpicture('category' . $generator->numberBetween(1, 10) . '.png');
+    $category1->setpicture('primeurs.jpg');
     $category1->setCreatedAt(new \DateTimeImmutable());
 
     $manager->persist($category1);
@@ -101,25 +101,17 @@ class AppFixtures extends Fixture
 
     $category2 = new Category();
     $category2->setname('restaurant');
-    $category2->setpicture('category' . $generator->numberBetween(1, 10) . '.png');
+    $category2->setpicture('restaurant.jpg');
     $category2->setCreatedAt(new \DateTimeImmutable());
 
     $manager->persist($category2);
 
     $category3 = new Category();
     $category3->setname('boulangerie');
-    $category3->setpicture('category' . $generator->numberBetween(1, 10) . '.png');
+    $category3->setpicture('boulangerie.jpg');
     $category3->setCreatedAt(new \DateTimeImmutable());
 
     $manager->persist($category3);
-
-
-    $category4 = new Category();
-    $category4->setname('épicerie');
-    $category4->setpicture('http://localhost:8080/images/category' . $generator->numberBetween(1, 3) . '.jpg');
-    $category4->setCreatedAt(new \DateTimeImmutable());
-
-    $manager->persist($category4);
 
     $shopEntities = array();
 
@@ -131,7 +123,6 @@ class AppFixtures extends Fixture
 
       $shop->setName('la boutique de ' . $generator->unique()->firstname());
       $shop->setDescription($generator->unique()->text(15));
-      $shop->setpicture('http://localhost:8080/images/shop' . $generator->numberBetween(1, 2) . '.jpg');
       $shop->setAddress($generator->numberBetween(1, 50) . ' rue de ' . $generator->unique()->word());
       $shop->setZipCode($generator->randomElement(['60803', '70120', '56550', '07530', '64470']));
       $shop->setCity($generator->randomElement(['Lille', 'Beauvais', 'Rochefort', 'Paris', 'Marseille', 'Toulouse']));
@@ -142,7 +133,8 @@ class AppFixtures extends Fixture
       $shop->setNameSlug('la boutique de ' . $generator->unique()->firstname());
       $shop->setUser($generator->randomElement([$user1, $user2, $user3, $user4]));
       $shop->setCreatedAt(new \DateTimeImmutable());
-      $shop->addCategory($generator->randomElement([$category1, $category2, $category3, $category4]));
+      $shop->addCategory($generator->randomElement([$category1, $category2, $category3]));
+      $shop->setpicture($shop->getCategories()[0] . $generator->numberBetween(1, 5) . '.jpg');
 
       $manager->persist($shop);
       $shopEntities[] = $shop;
@@ -187,11 +179,14 @@ class AppFixtures extends Fixture
 
       $product = new Product();
 
+      $productImages = glob('public/images/product/*.*');
+      $productImage = array_rand($productImages);
+
       $product->setName($generator->unique()->word());
       $product->setDescription($generator->unique()->sentence($nbWords = 10, $variableNbWords = true), '.');
       $product->setUc($generator->randomElement(['Kg', 'Litres', 'Carton']));
       $product->setPrice($generator->randomFloat(2));
-      $product->setPicture('http://localhost:8080/images/product' . $generator->numberBetween(1, 3) . '.jpg');
+      $product->setPicture(mb_substr($productImages[$productImage], 22));
       $product->setStock(0);
       $product->setCreatedAt(new \DateTimeImmutable());
       // récupérer le shop fixture quand ce sera fait
