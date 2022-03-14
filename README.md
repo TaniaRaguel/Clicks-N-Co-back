@@ -1,23 +1,17 @@
 # projet-clicks-n-co
 
-## Cloner le projet
-git clone git@github.com:O-clock-Wonderland/projet-clicks-n-co.git
+Pour ce projet de fin de formation, nous avions une équipe de 5 personnes dont 2 développeurs ayant fait la spécialisation React et 3 celle de Symfony. Afin de nous rapproché au mmieux des méthodes de travail en entreprise, nous avons utilisé la méthodologie agile SCRUM pour la gestion du projet.
 
-## Installation des dépendances
-composer install
 
-## Fichier d'environnement local
-- Création d'un fichier .env.local
-- DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7" (modifier db_user:db_password, db_name, et serverVersion)
+## Présentation
 
-## Création de la base de données
-bin/console d:d:c
+Clicks N Co est un site commerce qui permet  au site aux petits commerçants d'afficher leur produit sur le net et regroupe les magasins d'une même ville sur un seul site pour les clients.
 
-## Migration en bdd
-bin/console d:mi:mi
+Vous trouverez ici la partie back du site
 
-## Envoi de fixtures en bdd
-bin/console d:f:l
+Voici le lien http://clicks-n-co-wonderland.surge.sh/ et notre présentation sur youtube https://youtu.be/wcXrC8KM63s?t=35m27s
 
-## lancement serveur local
-php -S 0.0.0.0:8080 -t public
+
+
+
+
